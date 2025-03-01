@@ -88,7 +88,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ---
 
-For more information or assistance, feel free to reach out!# google-dashboard-api
-# google-dashboard-api
-# google-dashboard-api
-# google-dashboard-api
+For more information or assistance, feel free to reach out!
