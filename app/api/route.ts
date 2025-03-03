@@ -24,8 +24,24 @@ export async function GET() {
             endDate: 'today',
           },
         ],
-        dimensions: [{ "name": "city" }],
-        metrics: [{ name: 'activeUsers' }],
+        "dimensions": [
+      {
+        "name": "country"
+      },
+      {
+        "name": "region"
+      },
+      {
+        "name": "city"
+      },
+      {
+        "name": "browser"
+      },
+      {
+        "name": "pagePath"
+      },
+    ],
+        metrics: [{ name: 'activeUsers' },{name: 'screenPageViews', }]
       },
     });
 
