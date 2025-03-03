@@ -23,7 +23,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.grid-cols-3 {
+.grid-cols-2 {
   & > div {
     border: 1px solid black;
     padding: 10px;

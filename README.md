@@ -1,5 +1,7 @@
 # Google Analytics 4 (GA4) Custom Dashboard
 
+![homepage image](/public/homepage.png)
+
 This project demonstrates how to integrate **Google Analytics 4 (GA4)** with a **Next.js** application, leveraging the **GA4 Data API** to fetch and analyze user interaction data programmatically. The integration enables seamless tracking of user behavior and dynamic reporting of key metrics, such as active users, page views, and more.
 
 ---

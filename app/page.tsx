@@ -98,7 +98,7 @@ const groupedData = data?.rows?.reduce((acc :any, row :any) => {
   return (
     <div className='container mx-auto'>
       <h1 className='text-4xl'>Analytics Data</h1>
-      <div className='grid grid-cols-3'>
+      <div className='grid grid-cols-2'>
         <div>
         <UsersRound />
           <p className='text-5xl'>{totalActiveUsers}</p>
@@ -113,9 +113,6 @@ const groupedData = data?.rows?.reduce((acc :any, row :any) => {
                 </li>
             ))}
           </ul>
-        </div>
-        <div>
-          {totalActiveUsers}
         </div>
       </div>
       <table className='table-auto container'>
