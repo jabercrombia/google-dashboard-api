@@ -15,14 +15,11 @@ export default function AnalyticsData() {
   console.log(data);
 
 // Filter out rows with (not set) and invalid rows
-const filteredObjData = data?.rows.filter(row => {
-  // Check if dimensionValues and metricValues exist and are arrays
-  if (!Array.isArray(row.dimensionValues) || !Array.isArray(row.metricValues)) {
-      return false; // Skip this row
-  }
+let filteredObjData = data?.rows.filter(row => {
   // Check if any dimension value is (not set)
   return !row.dimensionValues.some(dim => dim.value === "(not set)");
 });
+
 
     // Consolidate data by city
     const consolidatedData = filteredObjData?.reduce((acc, row) => {
@@ -46,60 +43,21 @@ const filteredObjData = data?.rows.filter(row => {
 
   const result = Object.values(consolidatedData || {});
 
+
+  function compare( a, b ) {
+    if ( a.metricValues[0] > b.metricValues[0] ){
+      return -1;
+    }
+    if ( a.metricValues[0] < b.metricValues[0] ){
+      return 1;
+    }
+    return 0;
+  }
+  
+ 
 console.log('filter');
-console.log(result);
+console.log( result.sort( compare ));
 console.log('filter up');
-
-
-// // Consolidate data by city
-// const consolidatedData = filteredObjData?.rows.reduce((acc, row) => {
-//   const city = row.dimensionValues[2].value; // Assuming city is the 3rd dimension
-//   if (!acc[city]) {
-//       acc[city] = {
-//           dimensionValues: row.dimensionValues,
-//           metricValues: row.metricValues.map(metric => parseInt(metric.value, 10))
-//       };
-//   } else {
-//       acc[city].metricValues = acc[city].metricValues.map((metric, index) => 
-//           metric + parseInt(row.metricValues[index].value, 10)
-//       );
-//   }
-//   return acc;
-// }, {});
-
-// const result = Object.values(consolidatedData);
-
-// group cities and countries
-  const groupedDatalol = data?.rows.reduce((acc: any, row: any) => {
-    const country = row.dimensionValues[0]?.value || "Unknown";
-    const region = row.dimensionValues[1]?.value || "Unknown";
-    const city = row.dimensionValues[2]?.value || "Unknown";
-
-    // Initialize the nested structure if it doesn't exist
-    if (!acc[country]) {
-        acc[country] = {};
-    }
-    if (!acc[country][region]) {
-        acc[country][region] = {};
-    }
-    if (!acc[country][region][city]) {
-        acc[country][region][city] = {
-            screenPageViews: 0,
-            activeUsers: 0,
-        };
-    }
-
-    // Sum up the metrics
-    const screenPageViews = parseInt(row.metricValues[0]?.value, 10) || 0;
-    const activeUsers = parseInt(row.metricValues[1]?.value, 10) || 0;
-
-    acc[country][region][city].screenPageViews += screenPageViews;
-    acc[country][region][city].activeUsers += activeUsers;
-
-    return acc;
-}, {});
-
-console.log(groupedDatalol);
 
 
 const totalActiveUsers = data?.rows?.reduce((sum: number, row : any) => {
@@ -122,7 +80,7 @@ data?.rows?.forEach((row: any) => {
 
 
 // group pagepath and pageviews
-const groupedData = data?.rows?.reduce((acc :any, row :any) => {
+let groupedPageData = data?.rows?.reduce((acc :any, row :any) => {
   const pagePath = row.dimensionValues[4].value; // pagePath is at index 4
   const screenPageViews = parseInt(row.metricValues[0].value, 10); // screenPageViews is the first metric
 
@@ -134,14 +92,17 @@ const groupedData = data?.rows?.reduce((acc :any, row :any) => {
   return acc;
 }, {});
 
+groupedPageData =  Object.entries(groupedPageData || {});
+
+console.log(groupedPageData);
+
   return (
     <div className='container mx-auto'>
       <h1 className='text-4xl'>Analytics Data</h1>
       <div className='grid grid-cols-2'>
         <div className='drop-shadow-sm'>
-        <UsersRound />
+        <h2>Total Users</h2>
           <p className='text-5xl'>{totalActiveUsers}</p>
-          <p>Users</p>
         </div>
         <div className='drop-shadow-sm'>
         <h2 className='capitalize'>Most used browsers</h2>
@@ -173,6 +134,25 @@ const groupedData = data?.rows?.reduce((acc :any, row :any) => {
               <td>{elem.dimensionValues[1].value}</td>
               <td>{elem.dimensionValues[2].value}</td>
               <td>{elem.metricValues[0]}</td>
+            </tr>
+            )
+          )}
+          </tbody>
+          </table>
+        </div>
+        <div className='drop-shadow-sm'>
+        <table className='table-auto container'>
+            <thead className='text-left'>
+              <tr>
+                <th>Page Title</th>
+                <th>Count</th>
+              </tr>
+            </thead>
+            <tbody>
+          {groupedPageData?.map((elem : any , index: any) => (
+            <tr key={index}>
+              <td>{elem[0]}</td>
+              <td>{elem[1]}</td>
             </tr>
             )
           )}

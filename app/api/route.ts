@@ -38,10 +38,24 @@ export async function GET() {
         "name": "browser"
       },
       {
-        "name": "pagePath"
+        "name": "pageTitle"
+      },
+      {
+        "name": "date"
       },
     ],
-        metrics: [{ name: 'activeUsers' },{name: 'screenPageViews', }]
+        metrics: [{ name: 'activeUsers' },{name: 'screenPageViews', },{name: 'sessions', }],
+        // excluding specific city till its excluded in ga4 reports
+        "dimensionFilter": {
+          "notExpression": {
+            "filter": {
+              "fieldName": "city",
+              "stringFilter": {
+                "value": process.env.GA4_EXCLUDE_CITY
+              }
+            }
+          }
+        }
       },
     });
 
