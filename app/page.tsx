@@ -50,9 +50,9 @@ export default function AnalyticsData() {
   const result = Object.values(consolidatedData || {});
 
 
-const totalActiveUsers = data?.rows?.reduce((sum: number, row : any) => {
-    return sum + parseInt(row.metricValues[0].value, 10);
-}, 0);
+// const totalActiveUsers = data?.rows?.reduce((sum: number, row : any) => {
+//     return sum + parseInt(row.metricValues[0].value, 10);
+// }, 0);
 
 
   return (
@@ -66,7 +66,7 @@ const totalActiveUsers = data?.rows?.reduce((sum: number, row : any) => {
       <div className='grid md:grid-cols-2'>
         <div className='drop-shadow-sm rounded-sm p-[10px] m-[10px] bg-white'>
         <h2>Total Users</h2>
-          <p className='text-5xl'>{totalActiveUsers}</p>
+          {/* <p className='text-5xl'>{totalActiveUsers}</p> */}
         </div>
         <div className='drop-shadow-sm rounded-sm p-[10px] m-[10px] bg-white'>
           <BrowserMetrics rows={data?.rows} />
