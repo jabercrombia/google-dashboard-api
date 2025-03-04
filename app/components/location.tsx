@@ -26,7 +26,7 @@ const CityViews: React.FC<CityViewsProps> = ({ data }) => {
   const cityViews: { [key: string]: number } = {};
 
   // Process the data and filter out rows with "(not set)" city
-  data.rows.forEach((row) => {
+  data?.rows.forEach((row) => {
     const city = row.dimensionValues[2].value; // City is at index 2
 
     // Skip rows where the city is "(not set)"
