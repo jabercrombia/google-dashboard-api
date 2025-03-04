@@ -33,38 +33,21 @@ export default function AnalyticsData() {
         </p>
       </div>
       <div className='grid md:grid-cols-2'>
-        <div className='drop-shadow-sm rounded-sm p-[10px] m-[10px] bg-white'>
-        <TotalActiveUsers data={data} classes="bg-white"/>
-        <div className='drop-shadow-sm rounded-sm p-[10px] m-[10px] bg-white'>
+        
+          <TotalActiveUsers data={data} classes="bg-white"/>
+      
           <BrowserMetrics rows={data?.rows} />
-        </div>
+      
       </div>
       <div className='grid grid-cols-1'>
     
          
-          <DateViewsMetrics rows={data?.rows} classes="bg-white m-[10px] p-[10px] drop-shadow-sm rounded-sm" />
-          {/* <Box sx={{ width: '100%' }}>
-            <BarChart className='mx-auto'
-              xAxis={[{ scaleType: 'band', dataKey: 'date' }]}
-              series={[
-                {
-                  dataKey: 'activeUsers'
-                },
-              ]}
-              dataset={accumulatedData}
-              width={1000}
-              height={300}
-            />
-          </Box> */}
-        
-       
-       
+          <DateViewsMetrics rows={data?.rows} classes="bg-white m-[10px] p-[10px] drop-shadow-sm rounded-sm" />       
       </div>
       <div className='grid md:grid-cols-2'>
             <Location data={data} classes="bg-white p-[10px] m-[10px] rounded-sm dropshadow-sm"/>
             <PageData data={data} classes="bg-white p-[10px] m-[10px] rounded-sm dropshadow-sm"/>
       </div>
-    </div>
     </div>
   );
 }
