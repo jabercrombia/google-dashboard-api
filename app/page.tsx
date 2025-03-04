@@ -61,35 +61,6 @@ export default function AnalyticsData() {
     dimensionValues: DimensionValue[];
     metricValues: MetricValue[];
   }
-  
-  const update_data: DataItem[] = data;
-  const dateFormatString = (a:string) => a.substring(6, 8);
-  const accumulateActiveUsersByDate = (data:DataItem[]): { date: string; activeUsers: number }[] => {
-    const result: { [date: string]: number } = {};
-  
-    data?.rows.forEach((item : any) => {
-      let date = item.dimensionValues[item.dimensionValues.length - 1].value; // Extract date
-      date = dateFormatString(date);
-      const activeUsers = parseInt(item.metricValues[0].value); // Extract activeUsers
-  
-      if (result[date]) {
-        result[date] += activeUsers; // Accumulate activeUsers for the date
-      } else {
-        result[date] = activeUsers; // Initialize activeUsers for the date
-      }
-    });
-  
-    // Convert the result object into an array of objects
-    console.log(result);
-    return Object.keys(result).map((date) => ({
-      date,
-      activeUsers: result[date],
-    }));
-  };
-  
-  const accumulatedData = accumulateActiveUsersByDate(update_data);
-  
-  console.log(accumulatedData);
 
 const totalActiveUsers = data?.rows?.reduce((sum: number, row : any) => {
     return sum + parseInt(row.metricValues[0].value, 10);

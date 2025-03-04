@@ -20,8 +20,6 @@ interface DateViewsDataProps {
   classes?: string;
 }
 
-const dateFormatString = (a:string) => a.substring(6, 8);
-
 const DateViewsData: React.FC<DateViewsDataProps> = ({ rows, classes }) => {
   // Group dates and aggregate views
   const groupedDateViewsData = rows?.reduce((acc, row) => {
@@ -36,8 +34,8 @@ const DateViewsData: React.FC<DateViewsDataProps> = ({ rows, classes }) => {
     return acc;
   }, {} as Record<string, number>);
 
-  let formattedData = Object.entries(groupedDateViewsData || {}).map(([date, views]) => ({
-    date,
+  const formattedData = Object.entries(groupedDateViewsData || {}).map(([date, views]) => ({
+    date: date.substring(6, 8),
     views,
   }));
 
@@ -46,7 +44,7 @@ const DateViewsData: React.FC<DateViewsDataProps> = ({ rows, classes }) => {
 
   const sortedByDay = formattedData.sort((a, b) => a.date.localeCompare(b.date));
 
-  console.log(sortedByDay);
+  //console.log(sortedByDay);
   return (
     <div className={classes}>
       <h2>Page Views</h2>
