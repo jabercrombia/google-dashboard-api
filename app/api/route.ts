@@ -44,7 +44,7 @@ export async function GET() {
         "name": "date"
       },
     ],
-        metrics: [{ name: 'activeUsers' },{name: 'screenPageViews', },{name: 'sessions', }],
+        metrics: [{ name: 'activeUsers' },{name: 'screenPageViews', }],
         // excluding specific city till its excluded in ga4 reports
         "dimensionFilter": {
           "notExpression": {
