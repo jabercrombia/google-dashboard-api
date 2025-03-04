@@ -1,42 +1,71 @@
 import React from 'react';
 
-interface DataItem {
-  dimensionValues: { value: string }[];
-  metricValues: number[];
+// Define the types
+interface DimensionValue {
+  value: string;
 }
 
-interface MyComponentProps {
-  data?: DataItem[]; 
-  classes?: string;
+interface MetricValue {
+  value: string;
 }
 
-const MyComponent: React.FC<MyComponentProps> = ({ data, classes }) => {
+interface Row {
+  dimensionValues: DimensionValue[];
+  metricValues: MetricValue[];
+}
+
+interface AnalyticsData {
+  rows: Row[];
+}
+
+interface CityViewsProps {
+  data: AnalyticsData;
+}
+
+const CityViews: React.FC<CityViewsProps> = ({ data }) => {
+  const cityViews: { [key: string]: number } = {};
+
+  // Process the data and filter out rows with "(not set)" city
+  data.rows.forEach((row) => {
+    const city = row.dimensionValues[2].value; // City is at index 2
+
+    // Skip rows where the city is "(not set)"
+    if (city === '(not set)') {
+      return;
+    }
+
+    const views = parseInt(row.metricValues[1].value, 10); // screenPageViews is at index 1
+
+    // If the city already exists in the object, add the views
+    if (cityViews[city]) {
+      cityViews[city] += views;
+    } else {
+      // Otherwise, initialize the city with the views
+      cityViews[city] = views;
+    }
+  });
+
+  // Convert to an array of objects
+  const cityViewsArray: { [key: string]: number }[] = Object.keys(cityViews).map((city) => ({
+    [city]: cityViews[city],
+  }));
+
   return (
-    <div className={classes}>
-        <h2>Location</h2>
-        <table className='w-full'>
-            <thead className='text-left'>
-              <tr>
-                <th>Country</th>
-                <th>Region</th>
-                <th>City</th>
-                <th>Users</th>
-              </tr>
-            </thead>
-            <tbody>
-
-                {data?.map((elem: DataItem, index: number) => (
-                <tr key={index}>
-                    <td>{elem.dimensionValues[0].value}</td>
-                    <td>{elem.dimensionValues[1].value}</td>
-                    <td>{elem.dimensionValues[2].value}</td>
-                    <td>{elem.metricValues[0]}</td>
-                </tr>
-                )) ?? []}
-            </tbody>
-        </table>
+    <div>
+      <h1>City Views</h1>
+      <ul>
+        {cityViewsArray.map((cityObj, index) => {
+          const cityName = Object.keys(cityObj)[0];
+          const views = cityObj[cityName];
+          return (
+            <li key={index}>
+              <strong>{cityName}</strong>: {views} views
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };
 
-export default MyComponent;
+export default CityViews;

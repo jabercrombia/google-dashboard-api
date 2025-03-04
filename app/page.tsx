@@ -20,39 +20,11 @@ export default function AnalyticsData() {
 
   console.log(data);
 
-  // Filter out rows with (not set) and invalid rows
-  const filteredObjData = data?.rows.filter(row => {
-    // Check if any dimension value is (not set)
-    return !row.dimensionValues.some(dim => dim.value === "(not set)");
-  });
 
 
-    // Consolidate data by city
-  const consolidatedData = filteredObjData?.reduce((acc, row) => {
-    const city = row.dimensionValues[2]?.value;
-    if (!city) {
-        return acc; // Skip if city is missing
-    }
-
-    if (!acc[city]) {
-        acc[city] = {
-            dimensionValues: row.dimensionValues,
-            metricValues: row.metricValues.map(metric => parseInt(metric.value, 10))
-        };
-    } else {
-        acc[city].metricValues = acc[city].metricValues.map((metric, index) => 
-            metric + parseInt(row.metricValues[index]?.value || 0, 10)
-        );
-    }
-    return acc;
-  }, {});
-
-  const result = Object.values(consolidatedData || {});
-
-
-// const totalActiveUsers = data?.rows?.reduce((sum: number, row : any) => {
-//     return sum + parseInt(row.metricValues[0].value, 10);
-// }, 0);
+const totalActiveUsers = data?.rows?.reduce((sum: number, row : any) => {
+    return sum + parseInt(row.metricValues[0].value, 10);
+}, 0);
 
 
   return (
@@ -66,7 +38,7 @@ export default function AnalyticsData() {
       <div className='grid md:grid-cols-2'>
         <div className='drop-shadow-sm rounded-sm p-[10px] m-[10px] bg-white'>
         <h2>Total Users</h2>
-          {/* <p className='text-5xl'>{totalActiveUsers}</p> */}
+          <p className='text-5xl'>{totalActiveUsers}</p>
         </div>
         <div className='drop-shadow-sm rounded-sm p-[10px] m-[10px] bg-white'>
           <BrowserMetrics rows={data?.rows} />
@@ -94,7 +66,7 @@ export default function AnalyticsData() {
        
       </div>
       <div className='grid md:grid-cols-2'>
-            <Location data={result} classes="bg-white p-[10px] m-[10px] rounded-sm dropshadow-sm"/>
+            <Location data={data} classes="bg-white p-[10px] m-[10px] rounded-sm dropshadow-sm"/>
             <PageData data={data} classes="bg-white p-[10px] m-[10px] rounded-sm dropshadow-sm"/>
       </div>
     </div>
