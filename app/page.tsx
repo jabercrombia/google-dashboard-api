@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
 import Box from '@mui/material/Box';
 
-
+import Location from "./components/location";
 export default function AnalyticsData() {
   const [data, setData] = useState(null);
 
@@ -60,7 +60,7 @@ export default function AnalyticsData() {
   }
   
   const update_data: DataItem[] = data;
-  const dateFormatString = (a:any) => a.substring(6, 8);
+  const dateFormatString = (a:string) => a.substring(6, 8);
   const accumulateActiveUsersByDate = (data:DataItem[]): { date: string; activeUsers: number }[] => {
     const result: { [date: string]: number } = {};
   
@@ -124,6 +124,11 @@ groupedPageData =  Object.entries(groupedPageData || {});
 
 console.log(groupedPageData);
 
+interface DataItem {
+  dimensionValues: { value: string }[];
+  metricValues: number[];
+}
+
   return (
     <div className='container mx-auto'>
       <div className='mx-[10px] bg-white rounded-sm mt-[20px] p-[10px]'>
@@ -169,30 +174,7 @@ console.log(groupedPageData);
        
       </div>
       <div className='grid md:grid-cols-2'>
-        <div className='drop-shadow-sm rounded-sm p-[10px] m-[10px] bg-white'>
-          <h2>Location</h2>
-          <table className='table-auto container'>
-            <thead className='text-left'>
-              <tr>
-                <th>Country</th>
-                <th>Region</th>
-                <th>City</th>
-                <th>Users</th>
-              </tr>
-            </thead>
-            <tbody>
-          {result?.map((elem : any , index: any) => (
-            <tr key={index}>
-              <td>{elem.dimensionValues[0].value}</td>
-              <td>{elem.dimensionValues[1].value}</td>
-              <td>{elem.dimensionValues[2].value}</td>
-              <td>{elem.metricValues[0]}</td>
-            </tr>
-            )
-          )}
-          </tbody>
-          </table>
-        </div>
+            <Location data={result} classes="bg-white"/>
         <div className='drop-shadow-sm rounded-sm p-[10px] m-[10px] bg-white'>
         <h2>Page Title</h2>
           <table className='table-auto container'>
@@ -203,7 +185,7 @@ console.log(groupedPageData);
               </tr>
             </thead>
             <tbody>
-              {groupedPageData?.map((elem : any , index: any) => (
+              {groupedPageData?.map((elem : [string,number] , index: number) => (
                 <tr key={index}>
                   <td>{elem[0]}</td>
                   <td>{elem[1]}</td>
