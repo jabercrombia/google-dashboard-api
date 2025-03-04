@@ -49,18 +49,6 @@ export default function AnalyticsData() {
 
   const result = Object.values(consolidatedData || {});
 
-  interface DimensionValue {
-    value: string;
-  }
-  
-  interface MetricValue {
-    value: number;
-  }
-  
-  interface DataItem {
-    dimensionValues: DimensionValue[];
-    metricValues: MetricValue[];
-  }
 
 const totalActiveUsers = data?.rows?.reduce((sum: number, row : any) => {
     return sum + parseInt(row.metricValues[0].value, 10);
