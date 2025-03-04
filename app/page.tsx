@@ -7,6 +7,7 @@ import Location from "./components/location";
 import PageData from "./components/pagedata";
 import BrowserMetrics from "./components/browsermetrics";
 import DateViewsMetrics from "./components/dateviewmetrics";
+import TotalActiveUsers from "./components/totalactiveusers";
 
 export default function AnalyticsData() {
   const [data, setData] = useState(null);
@@ -22,10 +23,6 @@ export default function AnalyticsData() {
 
 
 
-const totalActiveUsers = data?.rows?.reduce((sum: number, row : any) => {
-    return sum + parseInt(row.metricValues[0].value, 10);
-}, 0);
-
 
   return (
     <div className='container mx-auto'>
@@ -37,9 +34,7 @@ const totalActiveUsers = data?.rows?.reduce((sum: number, row : any) => {
       </div>
       <div className='grid md:grid-cols-2'>
         <div className='drop-shadow-sm rounded-sm p-[10px] m-[10px] bg-white'>
-        <h2>Total Users</h2>
-          <p className='text-5xl'>{totalActiveUsers}</p>
-        </div>
+        <TotalActiveUsers data={data} classes="bg-white"/>
         <div className='drop-shadow-sm rounded-sm p-[10px] m-[10px] bg-white'>
           <BrowserMetrics rows={data?.rows} />
         </div>
@@ -69,6 +64,7 @@ const totalActiveUsers = data?.rows?.reduce((sum: number, row : any) => {
             <Location data={data} classes="bg-white p-[10px] m-[10px] rounded-sm dropshadow-sm"/>
             <PageData data={data} classes="bg-white p-[10px] m-[10px] rounded-sm dropshadow-sm"/>
       </div>
+    </div>
     </div>
   );
 }
