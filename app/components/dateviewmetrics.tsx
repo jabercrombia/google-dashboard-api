@@ -39,12 +39,9 @@ const DateViewsData: React.FC<DateViewsDataProps> = ({ rows, classes }) => {
     views,
   }));
 
-  
-  console.log(formattedData);
 
-  const sortedByDay = formattedData.sort((a, b) => a.date.localeCompare(b.date));
 
-  //console.log(sortedByDay);
+
   return (
     <div className={classes}>
       <h2>Page Views</h2>
