@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 
 import Location from "./components/location";
 import PageData from "./components/pagedata";
+import BrowserMetrics from "./components/browsermetrics";
 export default function AnalyticsData() {
   const [data, setData] = useState(null);
 
@@ -107,11 +108,6 @@ data?.rows?.forEach((row: any) => {
     }
 });
 
-interface DataItem {
-  dimensionValues: { value: string }[];
-  metricValues: number[];
-}
-
   return (
     <div className='container mx-auto'>
       <div className='mx-[10px] bg-white rounded-sm mt-[20px] p-[10px]'>
@@ -126,14 +122,7 @@ interface DataItem {
           <p className='text-5xl'>{totalActiveUsers}</p>
         </div>
         <div className='drop-shadow-sm rounded-sm p-[10px] m-[10px] bg-white'>
-        <h2 className='capitalize'>Most used browsers</h2>
-          <ul>
-            {Object.entries(browserMetrics).map(([browser, activeUsers]) => (
-                <li key={browser}>
-                    <strong>{browser}:</strong> {activeUsers}
-                </li>
-            ))}
-          </ul>
+          <BrowserMetrics rows={data.rows} />
         </div>
       </div>
       <div className='grid grid-cols-1'>
