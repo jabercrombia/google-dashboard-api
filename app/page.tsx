@@ -1,8 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { UsersRound } from 'lucide-react';
-import { LineChart } from '@mui/x-charts/LineChart';
 import { BarChart } from '@mui/x-charts/BarChart';
 import Box from '@mui/material/Box';
 
@@ -20,7 +18,7 @@ export default function AnalyticsData() {
   console.log(data);
 
   // Filter out rows with (not set) and invalid rows
-  let filteredObjData = data?.rows.filter(row => {
+  const filteredObjData = data?.rows.filter(row => {
     // Check if any dimension value is (not set)
     return !row.dimensionValues.some(dim => dim.value === "(not set)");
   });
@@ -62,7 +60,7 @@ export default function AnalyticsData() {
   }
   
   const update_data: DataItem[] = data;
-  let dateFormatString = (a:any) => a.substring(6, 8);
+  const dateFormatString = (a:any) => a.substring(6, 8);
   const accumulateActiveUsersByDate = (data:DataItem[]): { date: string; activeUsers: number }[] => {
     const result: { [date: string]: number } = {};
   
@@ -89,13 +87,6 @@ export default function AnalyticsData() {
   const accumulatedData = accumulateActiveUsersByDate(update_data);
   
   console.log(accumulatedData);
-
-
-  let dateDataSet = accumulatedData.map(elem =>dateFormatString(elem.date));
-
-  //console.log(myFunction('20250303'));
-  const activeUserDataSet = accumulatedData.map(elem => elem.activeUsers);
-
 
 const totalActiveUsers = data?.rows?.reduce((sum: number, row : any) => {
     return sum + parseInt(row.metricValues[0].value, 10);
