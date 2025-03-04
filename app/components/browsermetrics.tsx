@@ -6,7 +6,7 @@ interface DimensionValue {
 }
 
 interface MetricValue {
-  value: string; // Assuming metric values are strings (e.g., "123")
+  value: string; 
 }
 
 interface Row {

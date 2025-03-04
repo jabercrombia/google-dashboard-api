@@ -1,12 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { BarChart } from '@mui/x-charts/BarChart';
-import Box from '@mui/material/Box';
+
 
 import Location from "./components/location";
 import PageData from "./components/pagedata";
 import BrowserMetrics from "./components/browsermetrics";
+import DateViewsMetrics from "./components/dateviewmetrics";
+
 export default function AnalyticsData() {
   const [data, setData] = useState(null);
 
@@ -94,19 +95,6 @@ const totalActiveUsers = data?.rows?.reduce((sum: number, row : any) => {
     return sum + parseInt(row.metricValues[0].value, 10);
 }, 0);
 
-// browser data
-const browserMetrics: { [key: string]: number } = {};
-
-data?.rows?.forEach((row: any) => {
-    const browser = row.dimensionValues[3].value; // Browser is at index 3
-    const activeUsers = parseInt(row.metricValues[0].value, 10);
-
-    if (browserMetrics[browser]) {
-        browserMetrics[browser] += activeUsers;
-    } else {
-        browserMetrics[browser] = activeUsers;
-    }
-});
 
   return (
     <div className='container mx-auto'>
@@ -122,13 +110,14 @@ data?.rows?.forEach((row: any) => {
           <p className='text-5xl'>{totalActiveUsers}</p>
         </div>
         <div className='drop-shadow-sm rounded-sm p-[10px] m-[10px] bg-white'>
-          <BrowserMetrics rows={data.rows} />
+          <BrowserMetrics rows={data?.rows} />
         </div>
       </div>
       <div className='grid grid-cols-1'>
-        <div className='bg-white m-[10px] p-[10px] drop-shadow-sm rounded-sm'>
-          <h2>Page Views</h2>
-          <Box sx={{ width: '100%' }}>
+    
+         
+          <DateViewsMetrics rows={data?.rows} classes="bg-white m-[10px] p-[10px] drop-shadow-sm rounded-sm" />
+          {/* <Box sx={{ width: '100%' }}>
             <BarChart className='mx-auto'
               xAxis={[{ scaleType: 'band', dataKey: 'date' }]}
               series={[
@@ -140,9 +129,9 @@ data?.rows?.forEach((row: any) => {
               width={1000}
               height={300}
             />
-          </Box>
+          </Box> */}
         
-        </div>
+       
        
       </div>
       <div className='grid md:grid-cols-2'>
