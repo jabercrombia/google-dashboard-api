@@ -5,6 +5,7 @@ import { BarChart } from '@mui/x-charts/BarChart';
 import Box from '@mui/material/Box';
 
 import Location from "./components/location";
+import PageData from "./components/pagedata";
 export default function AnalyticsData() {
   const [data, setData] = useState(null);
 
@@ -106,24 +107,6 @@ data?.rows?.forEach((row: any) => {
     }
 });
 
-
-// group pagepath and pageviews
-let groupedPageData = data?.rows?.reduce((acc :any, row :any) => {
-  const pagePath = row.dimensionValues[4].value; // pagePath is at index 4
-  const screenPageViews = parseInt(row.metricValues[0].value, 10); // screenPageViews is the first metric
-
-  if (!acc[pagePath]) {
-      acc[pagePath] = 0; // Initialize if the pagePath doesn't exist
-  }
-  acc[pagePath] += screenPageViews; // Accumulate screenPageViews
-
-  return acc;
-}, {});
-
-groupedPageData =  Object.entries(groupedPageData || {});
-
-console.log(groupedPageData);
-
 interface DataItem {
   dimensionValues: { value: string }[];
   metricValues: number[];
@@ -135,7 +118,7 @@ interface DataItem {
         <h1 className='text-4xl'>Analytics Data</h1>
         <p>I integrated the Google Analytics 4 (GA4) Data API into a Next.js application to dynamically fetch and display analytics data, such as active users and sessions, filtered by dimensions like date and country. Using client-side rendering with React hooks, the data was processed and presented in a user-friendly format, enabling real-time insights without the need for server-side rendering.
 
-</p>
+        </p>
       </div>
       <div className='grid md:grid-cols-2'>
         <div className='drop-shadow-sm rounded-sm p-[10px] m-[10px] bg-white'>
@@ -155,46 +138,27 @@ interface DataItem {
       </div>
       <div className='grid grid-cols-1'>
         <div className='bg-white m-[10px] p-[10px] drop-shadow-sm rounded-sm'>
-        <h2>Page Views</h2>
-        <Box sx={{ width: '100%' }}>
-          <BarChart className='mx-auto'
-            xAxis={[{ scaleType: 'band', dataKey: 'date' }]}
-            series={[
-              {
-                dataKey: 'activeUsers'
-              },
-            ]}
-            dataset={accumulatedData}
-            width={1000}
-            height={300}
-          />
-        </Box>
+          <h2>Page Views</h2>
+          <Box sx={{ width: '100%' }}>
+            <BarChart className='mx-auto'
+              xAxis={[{ scaleType: 'band', dataKey: 'date' }]}
+              series={[
+                {
+                  dataKey: 'activeUsers'
+                },
+              ]}
+              dataset={accumulatedData}
+              width={1000}
+              height={300}
+            />
+          </Box>
         
         </div>
        
       </div>
       <div className='grid md:grid-cols-2'>
             <Location data={result} classes="bg-white p-[10px] m-[10px] rounded-sm dropshadow-sm"/>
-        <div className='drop-shadow-sm rounded-sm p-[10px] m-[10px] bg-white'>
-        <h2>Page Title</h2>
-          <table className='table-auto container'>
-            <thead className='text-left'>
-              <tr>
-                <th>Page Title</th>
-                <th>Count</th>
-              </tr>
-            </thead>
-            <tbody>
-              {groupedPageData?.map((elem : [string,number] , index: number) => (
-                <tr key={index}>
-                  <td>{elem[0]}</td>
-                  <td>{elem[1]}</td>
-                </tr>
-                )
-              )}
-            </tbody>
-          </table>
-        </div>
+            <PageData data={data} classes="bg-white p-[10px] m-[10px] rounded-sm dropshadow-sm"/>
       </div>
     </div>
   );

@@ -24,9 +24,11 @@ body {
 }
 
 table {
-  background-color: white;
   td,th {
     padding:5px 0;
+  }
+  thead {
+    text-align: left;
   }
 }
 
