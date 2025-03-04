@@ -174,7 +174,7 @@ interface DataItem {
        
       </div>
       <div className='grid md:grid-cols-2'>
-            <Location data={result} classes="bg-white"/>
+            <Location data={result} classes="bg-white p-[10px] m-[10px] rounded-sm dropshadow-sm"/>
         <div className='drop-shadow-sm rounded-sm p-[10px] m-[10px] bg-white'>
         <h2>Page Title</h2>
           <table className='table-auto container'>
