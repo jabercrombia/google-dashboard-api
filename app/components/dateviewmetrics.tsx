@@ -35,10 +35,24 @@ const DateViewsData: React.FC<DateViewsDataProps> = ({ rows, classes }) => {
   }, {} as Record<string, number>);
 
   const formattedData = Object.entries(groupedDateViewsData || {}).map(([date, views]) => ({
-    date: date.substring(6, 8),
+    date,
     views,
   }));
 
+
+console.log(formattedData);
+
+  function convertDate(yyyymmdd : string) {
+    const year = yyyymmdd.slice(0, 4);
+    const month = yyyymmdd.slice(4, 6);
+    const day = yyyymmdd.slice(6, 8);
+
+    const date = new Date(`${year}-${month}-${day}`);
+    
+    const shortMonth = date.toLocaleString('en-US', { month: 'short' });
+
+    return shortMonth;
+  }
 
 
 
@@ -54,7 +68,10 @@ const DateViewsData: React.FC<DateViewsDataProps> = ({ rows, classes }) => {
       </ul>
       <Box sx={{ width: '100%' }}>
             <BarChart className='mx-auto'
-              xAxis={[{ scaleType: 'band', dataKey: 'date' }]}
+              xAxis={[{ scaleType: 'band', dataKey: 'date', valueFormatter: (date, context) =>
+                context.location === 'tick'
+                  ? `${convertDate(date)} \n  ${date.slice(-2)}` : ''
+               }]}
               series={[
                 {
                   dataKey: 'views'

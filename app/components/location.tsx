@@ -1,32 +1,16 @@
 import React from 'react';
-
-// Define the types
-interface DimensionValue {
-  value: string;
-}
-
-interface MetricValue {
-  value: string;
-}
-
-interface Row {
-  dimensionValues: DimensionValue[];
-  metricValues: MetricValue[];
-}
-
-interface Data {
-  rows: Row[];
-}
+import { Data, Row } from "./types";
 
 interface CityViewsProps {
   data: Data;
+  classes: string;
 }
 
-const CityViews: React.FC<CityViewsProps> = ({ data }) => {
+const CityViews: React.FC<CityViewsProps> = ({ data, classes }) => {
   const cityViews: { [key: string]: number } = {};
 
   // Process the data and filter out rows with "(not set)" city
-  data?.rows.forEach((row) => {
+  data?.rows?.forEach((row) => {
     const city = row.dimensionValues[2].value; // City is at index 2
 
     // Skip rows where the city is "(not set)"
@@ -45,25 +29,54 @@ const CityViews: React.FC<CityViewsProps> = ({ data }) => {
     }
   });
 
+
+
   // Convert to an array of objects
   const cityViewsArray: { [key: string]: number }[] = Object.keys(cityViews).map((city) => ({
     [city]: cityViews[city],
   }));
 
+
+
+  
+  type DataItem = Record<string, number>; // Define a type for data items
+
+  const sortedData = cityViewsArray
+    .map((item: DataItem): DataItem => {
+      const key = Object.keys(item)[0];
+      const value = item[key];
+      return { [key]: value };
+    })
+    .sort((a: DataItem, b: DataItem) => {
+      const keyA = Object.keys(a)[0];
+      const keyB = Object.keys(b)[0];
+      return (b[keyB] as number) - (a[keyA] as number); // Sort descending based on values
+  });
+
+  console.log(cityViewsArray);
   return (
-    <div>
-      <h1>City Views</h1>
-      <ul>
-        {cityViewsArray.map((cityObj, index) => {
-          const cityName = Object.keys(cityObj)[0];
-          const views = cityObj[cityName];
-          return (
-            <li key={index}>
-              <strong>{cityName}</strong>: {views} views
-            </li>
-          );
-        })}
-      </ul>
+    <div className={classes}>
+      <h2>Location</h2>
+      <table className='w-full'>
+        <thead>
+          <tr>
+            <th>City</th>
+            <th>Views</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sortedData.map((cityObj, index) => {
+            const cityName = Object.keys(cityObj)[0];
+            const views = cityObj[cityName];
+            return (
+              <tr key={index}>
+                <td>{cityName}</td>
+                <td>{views} </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 };
