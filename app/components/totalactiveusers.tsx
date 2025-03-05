@@ -1,7 +1,6 @@
 import React from 'react';
-interface Data {
-  rows?: Row[];
-}
+import { Data, Row } from "./types";
+
 // Define the types
 interface TotalActiveUsersProps {
   data: Data;
