@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-import { GoogleAnalytics } from '@next/third-parties/google'
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -14,7 +12,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: `GA4 Dashboard`,
   description: `This is a blog built with Next.js`,
   keywords: ['Next.js', 'React', 'JavaScript', 'GA4', 'google analytics'],
@@ -24,7 +22,6 @@ export const metadata = {
     images: '/homepage.png',
   },
 };
-
 
 export default function RootLayout({
   children,
@@ -38,7 +35,6 @@ export default function RootLayout({
       >
         {children}
       </body>
-      <GoogleAnalytics gaId={process.env.GOOGLE_TRACKIND_ID || ''} />
     </html>
   );
 }
