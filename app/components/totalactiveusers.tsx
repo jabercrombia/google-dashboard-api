@@ -8,7 +8,7 @@ interface TotalActiveUsersProps {
 }
 
 const TotalActiveUsers: React.FC<TotalActiveUsersProps> = ({ data, classes }) => {
-  // Calculate the total active users
+
   const totalActiveUsers = data?.rows?.reduce((sum: number, row: Row) => {
     return sum + parseInt(row.metricValues[0].value, 10);
   }, 0);
@@ -16,7 +16,7 @@ const TotalActiveUsers: React.FC<TotalActiveUsersProps> = ({ data, classes }) =>
   return (
     <div className={classes}>
       <h2>Total Active Users</h2>
-      <p>{totalActiveUsers}</p>
+      <p className='text-5xl'>{totalActiveUsers}</p>
     </div>
   );
 };

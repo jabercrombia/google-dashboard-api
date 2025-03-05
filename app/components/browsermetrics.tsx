@@ -8,7 +8,7 @@ interface BrowserDataProps {
   classes: string;
 }
 
-const BrowserData: React.FC<BrowserDataProps> = ({ data : classes }) => {
+const BrowserData: React.FC<BrowserDataProps> = ({ data , classes }) => {
   // Group browsers and aggregate active users
   const groupedBrowserData = data?.rows?.reduce((acc: Record<string, number>, row: Row) => {
     const browser = row.dimensionValues[3]?.value || "Unknown"; // Browser is at index 3
