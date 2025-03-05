@@ -1,8 +1,10 @@
 import React from 'react';
-
+interface Data {
+  rows?: Row[];
+}
 // Define the types
 interface TotalActiveUsersProps {
-  data: AnalyticsData;
+  data: Data;
   classes: string;
 }
 

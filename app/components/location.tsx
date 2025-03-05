@@ -14,12 +14,12 @@ interface Row {
   metricValues: MetricValue[];
 }
 
-interface AnalyticsData {
+interface Data {
   rows: Row[];
 }
 
 interface CityViewsProps {
-  data: AnalyticsData;
+  data: Data;
 }
 
 const CityViews: React.FC<CityViewsProps> = ({ data }) => {
