@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import Location from "./components/location";
 import PageData from "./components/pagedata";
 import BrowserMetrics from "./components/browsermetrics";
-import DateViewsMetrics from "./components/dateviewmetrics";
+import Graph from "./components/graph";
 import TotalActiveUsers from "./components/totalactiveusers";
 
 export default function AnalyticsData() {
@@ -33,15 +33,15 @@ export default function AnalyticsData() {
         </p>
       </div>
       <div className='grid md:grid-cols-2'>
-          {data && <TotalActiveUsers data={data} classes="bg-white p-[10px] m-[10px]"/>}
-          {data && <BrowserMetrics data={data}  classes="bg-white p-[10px] m-[10px]"/>}
+          {data && <TotalActiveUsers data={data}/>}
+          {data && <BrowserMetrics data={data} />}
       </div>
       <div className='grid grid-cols-1'>
-          {data && <DateViewsMetrics rows={data?.rows} classes="bg-white m-[10px] p-[10px] drop-shadow-sm rounded-sm" />}    
+          {data && <Graph data={data} classes="bg-white m-[10px] p-[10px] drop-shadow-sm rounded-sm" />}    
       </div>
       <div className='grid md:grid-cols-2'>
-            {data && <Location data={data} classes="bg-white p-[10px] m-[10px] rounded-sm dropshadow-sm"/>}
-            {data && <PageData data={data} classes="bg-white p-[10px] m-[10px] rounded-sm dropshadow-sm"/>}
+            {data && <Location data={data}/>}
+            {data && <PageData data={data}/>}
       </div>
     </div>
   );

@@ -7,14 +7,14 @@ interface TotalActiveUsersProps {
   classes: string;
 }
 
-const TotalActiveUsers: React.FC<TotalActiveUsersProps> = ({ data, classes }) => {
+const TotalActiveUsers: React.FC<TotalActiveUsersProps> = ({ data }) => {
 
   const totalActiveUsers = data?.rows?.reduce((sum: number, row: Row) => {
     return sum + parseInt(row.metricValues[0].value, 10);
   }, 0);
 
   return (
-    <div className={classes}>
+    <div>
       <h2>Total Active Users</h2>
       <p className='text-5xl'>{totalActiveUsers}</p>
     </div>

@@ -3,10 +3,9 @@ import { Data } from "./types";
 
 interface CityViewsProps {
   data: Data;
-  classes: string;
 }
 
-const CityViews: React.FC<CityViewsProps> = ({ data, classes }) => {
+const CityViews: React.FC<CityViewsProps> = ({ data }) => {
   const cityViews: { [key: string]: number } = {};
 
   // Process the data and filter out rows with "(not set)" city
@@ -53,9 +52,9 @@ const CityViews: React.FC<CityViewsProps> = ({ data, classes }) => {
       return (b[keyB] as number) - (a[keyA] as number); // Sort descending based on values
   });
 
-  console.log(cityViewsArray);
+
   return (
-    <div className={classes}>
+    <div>
       <h2>Location</h2>
       <table className='w-full'>
         <thead>

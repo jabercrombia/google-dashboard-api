@@ -33,5 +33,13 @@ table {
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 1.25rem;
+}
+
+.grid > div {
+  background-color: white;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }

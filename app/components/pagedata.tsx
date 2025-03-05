@@ -20,10 +20,9 @@ interface Data {
 
 interface GroupedPageDataProps {
   data: Data;
-  classes: string;
 }
 
-const GroupedPageData: React.FC<GroupedPageDataProps> = ({ data , classes }) => {
+const GroupedPageData: React.FC<GroupedPageDataProps> = ({ data }) => {
   // Process the data
   const groupedPageData = data?.rows?.reduce((acc: Record<string, number>, row: Row) => {
     const pagePath = row.dimensionValues[4]?.value || "unknown"; // pagePath is at index 4
@@ -38,7 +37,7 @@ const GroupedPageData: React.FC<GroupedPageDataProps> = ({ data , classes }) => 
   }, {} as Record<string, number>);
 
   return (
-    <div className={classes}>
+    <div>
       <h2>Page Data</h2>
       <table className='w-full'>
         <thead>

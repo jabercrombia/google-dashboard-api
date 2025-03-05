@@ -1,28 +1,16 @@
 import React from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
 import Box from '@mui/material/Box';
-// Define the types
-interface DimensionValue {
-  value: string;
-}
-
-interface MetricValue {
-  value: string; // Assuming metric values are strings (e.g., "123")
-}
-
-interface Row {
-  dimensionValues: DimensionValue[];
-  metricValues: MetricValue[];
-}
+import { Data } from "./types";
 
 interface DateViewsDataProps {
-  rows?: Row[];
-  classes?: string;
+  data: Data;
 }
 
-const DateViewsData: React.FC<DateViewsDataProps> = ({ rows, classes }) => {
+
+const DateViewsData: React.FC<DateViewsDataProps> = ({ data }) => {
   // Group dates and aggregate views
-  const groupedDateViewsData = rows?.reduce((acc, row) => {
+  const groupedDateViewsData = data?.rows?.reduce((acc: Record<string, number>, row: Row) => {
     const date = row.dimensionValues[5]?.value || "Unknown"; // Date is at index 5
     const views = parseInt(row.metricValues[1]?.value || "0", 10); // Screen page views is the second metric
 
@@ -38,6 +26,8 @@ const DateViewsData: React.FC<DateViewsDataProps> = ({ rows, classes }) => {
     date,
     views,
   }));
+console.log('formattedData');
+  console.log(formattedData);
 
   function convertDate(yyyymmdd : string) {
     const year = yyyymmdd.slice(0, 4);
@@ -54,7 +44,7 @@ const DateViewsData: React.FC<DateViewsDataProps> = ({ rows, classes }) => {
 
 
   return (
-    <div className={classes}>
+    <div>
       <h2>Page Views</h2>
       <Box sx={{ width: '100%' }}>
         <BarChart className='mx-auto'
