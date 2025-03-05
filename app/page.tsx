@@ -34,19 +34,19 @@ export default function AnalyticsData() {
       </div>
       <div className='grid md:grid-cols-2'>
         
-          <TotalActiveUsers data={data} classes="bg-white"/>
+          {data && <TotalActiveUsers data={data} classes="bg-white"/>}
       
-          <BrowserMetrics rows={data?.rows} />
+          {data && <BrowserMetrics rows={data?.rows} />}
       
       </div>
       <div className='grid grid-cols-1'>
     
          
-          <DateViewsMetrics rows={data?.rows} classes="bg-white m-[10px] p-[10px] drop-shadow-sm rounded-sm" />       
+          {data && <DateViewsMetrics rows={data?.rows} classes="bg-white m-[10px] p-[10px] drop-shadow-sm rounded-sm" />}    
       </div>
       <div className='grid md:grid-cols-2'>
-            <Location data={data} classes="bg-white p-[10px] m-[10px] rounded-sm dropshadow-sm"/>
-            <PageData data={data} classes="bg-white p-[10px] m-[10px] rounded-sm dropshadow-sm"/>
+            {data && <Location data={data} classes="bg-white p-[10px] m-[10px] rounded-sm dropshadow-sm"/>}
+            {data && <PageData data={data} classes="bg-white p-[10px] m-[10px] rounded-sm dropshadow-sm"/>}
       </div>
     </div>
   );
