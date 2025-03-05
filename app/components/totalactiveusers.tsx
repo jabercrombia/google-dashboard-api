@@ -4,7 +4,6 @@ import { Data, Row } from "./types";
 // Define the types
 interface TotalActiveUsersProps {
   data: Data;
-  classes: string;
 }
 
 const TotalActiveUsers: React.FC<TotalActiveUsersProps> = ({ data }) => {

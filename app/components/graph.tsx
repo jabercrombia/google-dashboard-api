@@ -26,8 +26,6 @@ const DateViewsData: React.FC<DateViewsDataProps> = ({ data }) => {
     date,
     views,
   }));
-console.log('formattedData');
-  console.log(formattedData);
 
   function convertDate(yyyymmdd : string) {
     const year = yyyymmdd.slice(0, 4);
@@ -40,9 +38,7 @@ console.log('formattedData');
 
     return shortMonth;
   }
-
-
-
+  
   return (
     <div>
       <h2>Page Views</h2>

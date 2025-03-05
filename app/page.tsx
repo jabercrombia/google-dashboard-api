@@ -19,11 +19,6 @@ export default function AnalyticsData() {
       .catch((error) => console.error(error));
   }, []);
 
-  console.log(data);
-
-
-
-
   return (
     <div className='container mx-auto'>
       <div className='mx-[10px] bg-white rounded-sm mt-[20px] p-[10px]'>
@@ -37,7 +32,7 @@ export default function AnalyticsData() {
           {data && <BrowserMetrics data={data} />}
       </div>
       <div className='grid grid-cols-1'>
-          {data && <Graph data={data} classes="bg-white m-[10px] p-[10px] drop-shadow-sm rounded-sm" />}    
+          {data && <Graph data={data}/>}    
       </div>
       <div className='grid md:grid-cols-2'>
             {data && <Location data={data}/>}
