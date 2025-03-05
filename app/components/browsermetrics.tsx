@@ -1,26 +1,16 @@
 import React from 'react';
 
-// Define the types
-interface DimensionValue {
-  value: string;
-}
+import { Data, Row } from "./types";
 
-interface MetricValue {
-  value: string; 
-}
-
-interface Row {
-  dimensionValues: DimensionValue[];
-  metricValues: MetricValue[];
-}
 
 interface BrowserDataProps {
-  rows?: Row[];
+  data?: Data;
+  classes: string;
 }
 
-const BrowserData: React.FC<BrowserDataProps> = ({ rows }) => {
+const BrowserData: React.FC<BrowserDataProps> = ({ data : classes }) => {
   // Group browsers and aggregate active users
-  const groupedBrowserData = rows?.reduce((acc, row) => {
+  const groupedBrowserData = data?.rows?.reduce((acc: Record<string, number>, row: Row) => {
     const browser = row.dimensionValues[3]?.value || "Unknown"; // Browser is at index 3
     const activeUsers = parseInt(row.metricValues[0]?.value || "0", 10); // Active users is the first metric
 
@@ -33,7 +23,7 @@ const BrowserData: React.FC<BrowserDataProps> = ({ rows }) => {
   }, {} as Record<string, number>);
 
   return (
-    <div>
+    <div className={classes}>
       <h2>Browser Data</h2>
       <ul>
         {Object.entries(groupedBrowserData || {}).map(([browser, activeUsers]) => (

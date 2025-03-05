@@ -56,13 +56,6 @@ const DateViewsData: React.FC<DateViewsDataProps> = ({ rows, classes }) => {
   return (
     <div className={classes}>
       <h2>Page Views</h2>
-      <ul>
-        {Object.entries(groupedDateViewsData || {}).map(([date, views]) => (
-          <li key={date}>
-            <strong>{date}:</strong> {views} views
-          </li>
-        ))}
-      </ul>
       <Box sx={{ width: '100%' }}>
         <BarChart className='mx-auto'
           xAxis={[{ scaleType: 'band', dataKey: 'date', valueFormatter: (date, context) =>

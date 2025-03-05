@@ -33,15 +33,10 @@ export default function AnalyticsData() {
         </p>
       </div>
       <div className='grid md:grid-cols-2'>
-        
-          {data && <TotalActiveUsers data={data} classes="bg-white"/>}
-      
-          {data && <BrowserMetrics rows={data?.rows} />}
-      
+          {data && <TotalActiveUsers data={data} classes="bg-white p-[10px] m-[10px]"/>}
+          {data && <BrowserMetrics data={data}  classes="bg-white p-[10px] m-[10px]"/>}
       </div>
       <div className='grid grid-cols-1'>
-    
-         
           {data && <DateViewsMetrics rows={data?.rows} classes="bg-white m-[10px] p-[10px] drop-shadow-sm rounded-sm" />}    
       </div>
       <div className='grid md:grid-cols-2'>
