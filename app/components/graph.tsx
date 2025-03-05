@@ -1,7 +1,7 @@
 import React from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
 import Box from '@mui/material/Box';
-import { Data } from "./types";
+import { Data, Row } from "./types";
 
 interface DateViewsDataProps {
   data: Data;
