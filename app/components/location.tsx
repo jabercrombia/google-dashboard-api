@@ -1,5 +1,5 @@
 import React from 'react';
-import { Data, Row } from "./types";
+import { Data } from "./types";
 
 interface CityViewsProps {
   data: Data;

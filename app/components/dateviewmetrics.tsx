@@ -39,9 +39,6 @@ const DateViewsData: React.FC<DateViewsDataProps> = ({ rows, classes }) => {
     views,
   }));
 
-
-console.log(formattedData);
-
   function convertDate(yyyymmdd : string) {
     const year = yyyymmdd.slice(0, 4);
     const month = yyyymmdd.slice(4, 6);
@@ -67,21 +64,21 @@ console.log(formattedData);
         ))}
       </ul>
       <Box sx={{ width: '100%' }}>
-            <BarChart className='mx-auto'
-              xAxis={[{ scaleType: 'band', dataKey: 'date', valueFormatter: (date, context) =>
-                context.location === 'tick'
-                  ? `${convertDate(date)} \n  ${date.slice(-2)}` : ''
-               }]}
-              series={[
-                {
-                  dataKey: 'views'
-                },
-              ]}
-              dataset={formattedData}
-              width={1000}
-              height={300}
-            />
-          </Box>
+        <BarChart className='mx-auto'
+          xAxis={[{ scaleType: 'band', dataKey: 'date', valueFormatter: (date, context) =>
+            context.location === 'tick'
+              ? `${convertDate(date)} \n  ${date.slice(-2)}` : ''
+            }]}
+          series={[
+            {
+              dataKey: 'views'
+            },
+          ]}
+          dataset={formattedData}
+          width={1000}
+          height={300}
+        />
+      </Box>
     </div>
   );
 };
