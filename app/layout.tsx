@@ -38,18 +38,13 @@ export const metadata: Metadata = {
     images: '/homepage.png',
   },
 };
+import AuthWrapper from "./components/authwrapper";
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body>
+        <AuthWrapper>{children}</AuthWrapper>
       </body>
     </html>
   );
