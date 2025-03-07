@@ -6,11 +6,16 @@ type AuthRequestBody = {
 
 export async function POST(req: Request) {
   try {
+    // Log incoming request body for debugging
     const { password }: AuthRequestBody = await req.json();
+    console.log("Received password:", password); // Log the received password
+
+    // Log the environment variable for debugging
     const correctPassword = process.env.PASSWORD;
+    console.log("Environment password:", correctPassword); // Log the password from .env
 
     if (!correctPassword) {
-      return NextResponse.json({ error: "Server misconfiguration" }, { status: 500 });
+      return NextResponse.json({ error: "Server misconfiguration: PASSWORD not found" }, { status: 500 });
     }
 
     if (password === correctPassword) {
@@ -19,6 +24,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, message: "Incorrect password" }, { status: 401 });
     }
   } catch (error) {
-    return NextResponse.json({ error: "Invalid request: " + error }, { status: 400 });
+    console.error("Error occurred:", error);
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
