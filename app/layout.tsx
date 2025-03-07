@@ -29,7 +29,6 @@ export const metadata: Metadata = {
   },
 };
 
-const password = process.env.PASSWORD;
 import AuthWrapper from "./components/authwrapper";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
