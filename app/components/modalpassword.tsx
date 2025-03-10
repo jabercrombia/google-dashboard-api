@@ -10,7 +10,7 @@ type PasswordModalProps = {
 const PasswordModal: React.FC<PasswordModalProps> = ({ onPasswordSubmit }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen] = useState(true);
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
