@@ -51,6 +51,5 @@ export default function AnalyticsData() {
       <ModalPassword onPasswordSubmit={handlePasswordSubmit} />
     )}
     </>
-    
   );
 }
