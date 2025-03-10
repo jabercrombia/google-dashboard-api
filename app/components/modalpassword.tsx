@@ -10,7 +10,7 @@ type PasswordModalProps = {
 const PasswordModal: React.FC<PasswordModalProps> = ({ onPasswordSubmit }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen] = useState(true);
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
@@ -31,25 +31,22 @@ const PasswordModal: React.FC<PasswordModalProps> = ({ onPasswordSubmit }) => {
   };
 
   return (
-
-
-<Dialog open={isOpen}>
-<DialogContent>
-  <DialogHeader>
-    <DialogTitle>Enter Password</DialogTitle>
-  </DialogHeader>
-  <Input
-    type="password"
-    value={password}
-    onChange={handlePasswordChange}
-    placeholder="Password"
-  />
-  {error && <p className="text-red-500">{error}</p>}
-  <p>This app is password protected beacause of API calls have a cost. If you would like to see the dashboard please reach out to me at <Link href="mailto:jabercrombia@gmail.com">jabercrombia@gmail.com</Link> </p>
-  <Button onClick={handleSubmit} className="mt-2 w-full">Submit</Button>
-</DialogContent>
-</Dialog>
-  
+  <Dialog open={isOpen}>
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle>Enter Password</DialogTitle>
+      </DialogHeader>
+      <Input
+        type="password"
+        value={password}
+        onChange={handlePasswordChange}
+        placeholder="Password"
+      />
+      {error && <p className="text-red-500">{error}</p>}
+      <p>This app is password protected beacause of API calls have a cost. If you would like to see the dashboard please reach out to me at <Link href="mailto:jabercrombia@gmail.com">jabercrombia@gmail.com</Link> </p>
+      <Button onClick={handleSubmit} className="mt-2 w-full">Submit</Button>
+    </DialogContent>
+  </Dialog>
   );
 };
 
