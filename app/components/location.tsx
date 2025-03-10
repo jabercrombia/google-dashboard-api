@@ -52,7 +52,6 @@ const CityViews: React.FC<CityViewsProps> = ({ data }) => {
       return (b[keyB] as number) - (a[keyA] as number); // Sort descending based on values
   });
 
-
   return (
     <div>
       <h2>Location</h2>
