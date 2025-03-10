@@ -14,9 +14,9 @@ const BrowserData: React.FC<BrowserDataProps> = ({ data }) => {
     const activeUsers = parseInt(row.metricValues[0]?.value || "0", 10); // Active users is the first metric
 
     if (!acc[browser]) {
-      acc[browser] = 0; // Initialize if the browser doesn't exist
+      acc[browser] = 0;
     }
-    acc[browser] += activeUsers; // Accumulate active users
+    acc[browser] += activeUsers;
 
     return acc;
   }, {} as Record<string, number>);
