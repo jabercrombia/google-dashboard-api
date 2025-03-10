@@ -14,9 +14,8 @@ export default function AnalyticsData() {
   const [data, setData] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Define the function that gets called when password is submitted
-  const handlePasswordSubmit = (password: string) => {
-    setIsAuthenticated(true); // Mark as authenticated
+  const handlePasswordSubmit = () => {
+    setIsAuthenticated(true);
   };
 
   useEffect(() => {

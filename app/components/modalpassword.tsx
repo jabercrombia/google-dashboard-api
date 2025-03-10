@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import Link from 'next/link';
 type PasswordModalProps = {
   onPasswordSubmit: (password: string) => void;
 };
@@ -38,6 +38,7 @@ const PasswordModal: React.FC<PasswordModalProps> = ({ onPasswordSubmit }) => {
           />
           <button className='btn btn-blue' onClick={handleSubmit}>Submit</button>
           {error && <p style={{ color: 'red' }}>{error}</p>}
+          <p>This app is password protected beacause of API calls have a cost. If you would like to see the dashboard please reach out to me at <Link href="mailto:jabercrombia@gmail.com">jabercrombia@gmail.com</Link></p>
       </div>
   </div>
   
