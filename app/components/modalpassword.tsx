@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 type PasswordModalProps = {
   onPasswordSubmit: (password: string) => void;
 };
@@ -7,6 +10,7 @@ type PasswordModalProps = {
 const PasswordModal: React.FC<PasswordModalProps> = ({ onPasswordSubmit }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isOpen, setIsOpen] = useState(true);
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
@@ -27,20 +31,24 @@ const PasswordModal: React.FC<PasswordModalProps> = ({ onPasswordSubmit }) => {
   };
 
   return (
-    <div className="flex h-screen items-center justify-center text-center">
-        <div className='mx-auto w-1/4'>
-          <h2>Enter Password</h2>
-          <input
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-            placeholder="Password"
-          />
-          <button className='btn btn-blue' onClick={handleSubmit}>Submit</button>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-          <p className='pt-[30px]'>This app is password protected beacause of API calls have a cost. If you would like to see the dashboard please reach out to me at <Link href="mailto:jabercrombia@gmail.com">jabercrombia@gmail.com</Link></p>
-      </div>
-  </div>
+
+
+<Dialog open={isOpen}>
+<DialogContent>
+  <DialogHeader>
+    <DialogTitle>Enter Password</DialogTitle>
+  </DialogHeader>
+  <Input
+    type="password"
+    value={password}
+    onChange={handlePasswordChange}
+    placeholder="Password"
+  />
+  {error && <p className="text-red-500">{error}</p>}
+  <p>This app is password protected beacause of API calls have a cost. If you would like to see the dashboard please reach out to me at <Link href="mailto:jabercrombia@gmail.com">jabercrombia@gmail.com</Link> </p>
+  <Button onClick={handleSubmit} className="mt-2 w-full">Submit</Button>
+</DialogContent>
+</Dialog>
   
   );
 };
