@@ -1,9 +1,7 @@
-// components/PasswordModal.tsx
-
 import React, { useState } from 'react';
 
 type PasswordModalProps = {
-  onPasswordSubmit: (password: string) => void; // This function is passed as a prop
+  onPasswordSubmit: (password: string) => void;
 };
 
 const PasswordModal: React.FC<PasswordModalProps> = ({ onPasswordSubmit }) => {
@@ -16,7 +14,6 @@ const PasswordModal: React.FC<PasswordModalProps> = ({ onPasswordSubmit }) => {
 
   const handleSubmit = async () => {
     try {
-      // Simulating password check
       const storedPassword = process.env.NEXT_PUBLIC_PASSWORD;
       if (password === storedPassword) {
         onPasswordSubmit(password);
@@ -30,17 +27,20 @@ const PasswordModal: React.FC<PasswordModalProps> = ({ onPasswordSubmit }) => {
   };
 
   return (
-    <div>
-      <h2>Enter Password</h2>
-      <input
-        type="password"
-        value={password}
-        onChange={handlePasswordChange}
-        placeholder="Password"
-      />
-      <button onClick={handleSubmit}>Submit</button>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-    </div>
+    <div className="flex h-screen items-center justify-center">
+        <div className='mx-auto'>
+          <h2>Enter Password</h2>
+          <input
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+            placeholder="Password"
+          />
+          <button className='btn btn-blue' onClick={handleSubmit}>Submit</button>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+      </div>
+  </div>
+  
   );
 };
 
