@@ -27,8 +27,8 @@ const PasswordModal: React.FC<PasswordModalProps> = ({ onPasswordSubmit }) => {
   };
 
   return (
-    <div className="flex h-screen items-center justify-center">
-        <div className='mx-auto'>
+    <div className="flex h-screen items-center justify-center text-center">
+        <div className='mx-auto w-1/4'>
           <h2>Enter Password</h2>
           <input
             type="password"
@@ -38,7 +38,7 @@ const PasswordModal: React.FC<PasswordModalProps> = ({ onPasswordSubmit }) => {
           />
           <button className='btn btn-blue' onClick={handleSubmit}>Submit</button>
           {error && <p style={{ color: 'red' }}>{error}</p>}
-          <p>This app is password protected beacause of API calls have a cost. If you would like to see the dashboard please reach out to me at <Link href="mailto:jabercrombia@gmail.com">jabercrombia@gmail.com</Link></p>
+          <p className='pt-[30px]'>This app is password protected beacause of API calls have a cost. If you would like to see the dashboard please reach out to me at <Link href="mailto:jabercrombia@gmail.com">jabercrombia@gmail.com</Link></p>
       </div>
   </div>
   
