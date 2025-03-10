@@ -19,7 +19,7 @@ This project was built to:
 - **Dynamic Data Fetching**: Used the GA4 Data API to fetch metrics like active users, session duration, and more.
 - **Secure Authentication**: Implemented secure authentication using a Google Cloud Service Account.
 - **Custom Reporting**: Built custom dashboards and reports using the fetched GA4 data.
-
+- **Password Modal for Secure API Access**: Added a password modal to restrict access to sensitive API requests. The modal ensures that only authenticated users can make requests to the GA4 Data API.
 ---
 
 ## **How It Works**
@@ -39,6 +39,12 @@ This project was built to:
    - The fetched data is used to generate custom reports and dashboards.
    - These reports provide insights into user behavior and app performance.
 
+5. **Password Modal**:
+   - A password modal was added to restrict API requests, ensuring that only users with the correct credentials can access and fetch data.
+   - The modal was created using **Shadcn** for an elegant and user-friendly design.
+
+   ![modal password image](/public/modalpassword.png)
+
 ---
 
 ## **Technologies Used**
@@ -46,6 +52,7 @@ This project was built to:
 - **Google Analytics 4 (GA4)**: For tracking user interactions and analyzing app performance.
 - **GA4 Data API**: For programmatically fetching analytics data.
 - **Google Cloud Service Account**: For secure authentication and API access.
+- **Shadcn**: Used for building the password modal.
 
 ---
 
@@ -55,6 +62,7 @@ The project is organized into the following components:
 2. **API Integration**: Uses the GA4 Data API to fetch analytics data.
 3. **Authentication**: Securely authenticates API requests using a Google Cloud Service Account.
 4. **Reporting**: Generates custom reports and dashboards using the fetched data.
+5. **Password Modal**: Restricts access to sensitive API endpoints using a password modal created with Shadcn.
 
 ---
 
@@ -75,6 +83,10 @@ The project is organized into the following components:
    - Use the fetched data to generate custom reports and dashboards.
    - Analyze user behavior and app performance.
 
+5. **Password Modal**:
+   - When accessing secure endpoints, users will be prompted with a password modal.
+   - Enter the correct credentials to gain access to the API data.
+
 ---
 
 ## **Benefits**
@@ -87,7 +99,3 @@ The project is organized into the following components:
 
 ## **License**
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-For more information or assistance, feel free to reach out!
