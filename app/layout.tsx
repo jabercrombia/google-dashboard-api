@@ -29,13 +29,12 @@ export const metadata: Metadata = {
   },
 };
 
-import AuthWrapper from "./components/authwrapper";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <AuthWrapper>{children}</AuthWrapper>
+        {children}
       </body>
       <GoogleAnalytics gaId={process.env.GOOGLE_TRACKIND_ID || ''} />
     </html>

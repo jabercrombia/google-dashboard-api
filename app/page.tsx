@@ -8,9 +8,16 @@ import PageData from "./components/pagedata";
 import BrowserMetrics from "./components/browsermetrics";
 import Graph from "./components/graph";
 import TotalActiveUsers from "./components/totalactiveusers";
+import ModalPassword from './components/modalpassword';
 
 export default function AnalyticsData() {
   const [data, setData] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  // Define the function that gets called when password is submitted
+  const handlePasswordSubmit = (password: string) => {
+    setIsAuthenticated(true); // Mark as authenticated
+  };
 
   useEffect(() => {
     fetch('/api/')
@@ -20,7 +27,9 @@ export default function AnalyticsData() {
   }, []);
 
   return (
-    <div className='container mx-auto dashboard'>
+    <>
+    {isAuthenticated ? (
+      <div className='container mx-auto dashboard'>
       <div className='mx-[10px] bg-white rounded-sm mt-[20px] p-[10px]'>
         <h1 className='text-4xl'>Analytics Data</h1>
         <p>I integrated the Google Analytics 4 (GA4) Data API into a Next.js application to dynamically fetch and display analytics data, such as active users and sessions, filtered by dimensions like date and country. Using client-side rendering with React hooks, the data was processed and presented in a user-friendly format, enabling real-time insights without the need for server-side rendering.
@@ -39,5 +48,10 @@ export default function AnalyticsData() {
             {data && <PageData data={data}/>}
       </div>
     </div>
+    ) : (
+      <ModalPassword onPasswordSubmit={handlePasswordSubmit} />
+    )}
+    </>
+    
   );
 }

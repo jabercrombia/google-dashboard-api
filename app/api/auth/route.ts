@@ -1,30 +1,21 @@
-import { NextResponse } from "next/server";
+// app/api/auth/route.ts
 
-type AuthRequestBody = {
-  password: string;
-};
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
-    // Log incoming request body for debugging
-    const { password }: AuthRequestBody = await req.json();
-    console.log("Received password:", password); // Log the received password
+    // Extract the password from the request body
+    const { password } = await req.json();
 
-    // Log the environment variable for debugging
-    const correctPassword = process.env.PASSWORD;
-    console.log("Environment password:", correctPassword); // Log the password from .env
+    const storedPassword = process.env.PASSWORD; // Store the password securely in your .env file
 
-    if (!correctPassword) {
-      return NextResponse.json({ error: "Server misconfiguration: PASSWORD not found" }, { status: 500 });
-    }
-
-    if (password === correctPassword) {
-      return NextResponse.json({ success: true });
+    if (password === storedPassword) {
+      return NextResponse.json({ message: 'Authenticated' }, { status: 200 });
     } else {
-      return NextResponse.json({ success: false, message: "Incorrect password" }, { status: 401 });
+      return NextResponse.json({ message: 'Incorrect password' }, { status: 401 });
     }
   } catch (error) {
-    console.error("Error occurred:", error);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    console.error('Error in authentication:', error);
+    return NextResponse.json({ message: 'Server Error' }, { status: 500 });
   }
 }

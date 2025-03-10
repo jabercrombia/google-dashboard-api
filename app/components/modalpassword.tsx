@@ -1,58 +1,47 @@
-"use client";
+// components/PasswordModal.tsx
 
-import { useState } from "react";
-import Link from 'next/link';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import React, { useState } from 'react';
 
 type PasswordModalProps = {
-  onAuthenticated: () => void;
+  onPasswordSubmit: (password: string) => void; // This function is passed as a prop
 };
 
-export default function PasswordModal({ onAuthenticated }: PasswordModalProps) {
-  const [password, setPassword] = useState("");
-  const [isOpen, setIsOpen] = useState(true);
-  const [error, setError] = useState("");
+const PasswordModal: React.FC<PasswordModalProps> = ({ onPasswordSubmit }) => {
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
+  };
 
   const handleSubmit = async () => {
-    setError(""); // Clear previous errors
     try {
-      const res = await fetch("/api/auth", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password }),
-      });
-
-      if (res.ok) {
-        localStorage.setItem("authenticated", "true");
-        onAuthenticated();
-        setIsOpen(false);
+      // Simulating password check
+      const storedPassword = process.env.NEXT_PUBLIC_PASSWORD;
+      if (password === storedPassword) {
+        onPasswordSubmit(password);
       } else {
-        setError("Incorrect password!");
+        setError('Incorrect password, please try again.');
       }
     } catch (error) {
-      console.error("Error:", error);
-      setError("Something went wrong. Try again.");
+      console.error('Error during authentication:', error);
+      setError('An error occurred');
     }
   };
 
   return (
-    <Dialog open={isOpen}>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Enter Password</DialogTitle>
-        </DialogHeader>
-        <Input
-          type="password"
-          placeholder="Enter password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        {error && <p className="text-red-500">{error}</p>}
-        <p>This app is password protected beacause of API calls have a cost. If you would like to see the dashboard please reach out to me at <Link href="mailto:jabercrombia@gmail.com">jabercrombia@gmail.com</Link> </p>
-        <Button onClick={handleSubmit} className="mt-2 w-full">Submit</Button>
-      </DialogContent>
-    </Dialog>
+    <div>
+      <h2>Enter Password</h2>
+      <input
+        type="password"
+        value={password}
+        onChange={handlePasswordChange}
+        placeholder="Password"
+      />
+      <button onClick={handleSubmit}>Submit</button>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+    </div>
   );
-}
+};
+
+export default PasswordModal;
