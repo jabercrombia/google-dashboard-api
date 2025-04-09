@@ -31,7 +31,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export default function PageViews(data : any) {
+export default function PageViews(data: { data: { rows: any[] } }) {
 
   function convertDate(yyyymmdd : string) {
     const year = yyyymmdd.slice(0, 4);
