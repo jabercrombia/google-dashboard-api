@@ -31,7 +31,18 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export default function PageViews(data: { data: { rows: any[] } }) {
+
+interface PageViewsProps {
+  data?: {
+    rows: {
+      dimensionValues: { value: string }[];
+      metricValues: { value: number }[];
+    }[];
+  };
+}
+
+
+export default function PageViews(data : PageViewsProps ) {
 
   function convertDate(yyyymmdd : string) {
     const year = yyyymmdd.slice(0, 4);
@@ -41,19 +52,19 @@ export default function PageViews(data: { data: { rows: any[] } }) {
     return `${year}-${month}-${day}`;
   }
 
-  const chartData = data.data.rows.map((item: { dimensionValues: { value: string }[], metricValues: { value: number }[]  }) => {
+  const chartData = data.data?.rows.map((item: { dimensionValues: { value: string }[], metricValues: { value: number }[]  }) => {
     return { 
       date: convertDate(item.dimensionValues[5]?.value),
       views: parseInt(item.metricValues[1]?.value.toString(), 10),
     };
   });
 
-  const sortedData = chartData.sort((a: { date: string; views: number }, b: { date: string; views: number }) => 
+  const sortedData = chartData?.sort((a: { date: string; views: number }, b: { date: string; views: number }) => 
     new Date(a.date).getTime() - new Date(b.date).getTime()
   );
 
   const aggregatedData = Object.values(
-    sortedData.reduce((acc : { [key: string]: { date: string; views: number } } , curr : { date: string; views: number }) => {
+    (sortedData ?? []).reduce((acc : { [key: string]: { date: string; views: number } } , curr : { date: string; views: number }) => {
       if (!acc[curr.date]) {
         acc[curr.date] = { date: curr.date, views: 0 }
       }

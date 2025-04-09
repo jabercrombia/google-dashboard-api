@@ -60,7 +60,7 @@ interface GroupedPageDataProps {
 export default function Component({ data }: GroupedPageDataProps) {
 
   const groupedPageData = data?.rows?.reduce((acc: Record<string, number>, row: Row) => {
-    //const pageName = row.dimensionValues[4]?.value || "unknown"; // pageName is at index 4
+
     let pageName = '';
     if (row.dimensionValues[4]?.value == 'jabercrombia') {
 
