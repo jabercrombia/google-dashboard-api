@@ -43,7 +43,8 @@ const PasswordModal: React.FC<PasswordModalProps> = ({ onPasswordSubmit }) => {
         placeholder="Password"
       />
       {error && <p className="text-red-500">{error}</p>}
-      <p>This app is password protected beacause of API calls have a cost. If you would like to see the dashboard please reach out to me at <Link href="mailto:jabercrombia@gmail.com">jabercrombia@gmail.com</Link> </p>
+      <p>This app is password protected beacause of API calls have a cost. If you would like to see the dashboard please reach out to me at <Link href="mailto:jabercrombia@gmail.com">jabercrombia@gmail.com</Link></p>
+      <p> All analytics data is based off of <Link href="https://www.jabercrombia.com" target='_blank'>www.jabercrombia.com</Link> </p>
       <Button onClick={handleSubmit} className="mt-2 w-full">Submit</Button>
     </DialogContent>
   </Dialog>

@@ -20,7 +20,7 @@ export async function GET() {
       requestBody: {
         dateRanges: [
           {
-            startDate: '30daysAgo',
+            startDate: '60daysAgo',
             endDate: 'today',
           },
         ],

@@ -1,4 +1,21 @@
 import React from 'react';
+
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 import { Data } from "./types";
 
 interface CityViewsProps {
@@ -50,31 +67,37 @@ const CityViews: React.FC<CityViewsProps> = ({ data }) => {
       const keyA = Object.keys(a)[0];
       const keyB = Object.keys(b)[0];
       return (b[keyB] as number) - (a[keyA] as number); // Sort descending based on values
-  });
+  }).slice(0, 5); // Get top 5 cities
 
   return (
     <div>
-      <h2>Location</h2>
-      <table className='w-full'>
-        <thead>
-          <tr>
-            <th>City</th>
-            <th>Views</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sortedData.map((cityObj, index) => {
-            const cityName = Object.keys(cityObj)[0];
-            const views = cityObj[cityName];
-            return (
-              <tr key={index}>
-                <td>{cityName}</td>
-                <td>{views} </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <Card className="h-full flex flex-col">
+        <CardHeader className="items-center pb-0">
+          <CardTitle><h2>Top 5 Visited Cities</h2></CardTitle>
+        </CardHeader>
+        <CardContent className="flex-1 pb-0">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[100px]">City</TableHead>
+                <TableHead>Visitors</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+            {sortedData.map((cityObj, index) => {
+                  const cityName = Object.keys(cityObj)[0];
+                  const views = cityObj[cityName];
+                  return (
+                    <TableRow key={index}>
+                      <TableCell className='w-1/2'>{cityName}</TableCell>
+                      <TableCell>{views} </TableCell>
+                    </TableRow>
+                  );
+                })}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
     </div>
   );
 };
