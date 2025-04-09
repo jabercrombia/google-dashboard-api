@@ -41,7 +41,7 @@ export default function PageViews(data: { data: { rows: any[] } }) {
     return `${year}-${month}-${day}`;
   }
 
-  const chartData = data.data.rows.map((item: { dimensionValues: { value: string }[], metricValues: { value: number }[]  }, index: number) => {
+  const chartData = data.data.rows.map((item: { dimensionValues: { value: string }[], metricValues: { value: number }[]  }) => {
     return { 
       date: convertDate(item.dimensionValues[5]?.value),
       views: parseInt(item.metricValues[1]?.value.toString(), 10),
