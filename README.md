@@ -13,6 +13,14 @@ This project was built to:
 3. **Ensure Secure Authentication**: Authenticate API requests using a Google Cloud Service Account for secure access to GA4 data.
 
 ---
+## **Project Setup**
+1. You will need to login to your Google Console and ENABLE the Google Analytics Data API to get the Data API KEY & Google Private Key,
+<img src="public/setup/api.png" width="300" alt="screenshot" style="padding: 15px" />
+
+2. Once enabled you will go to the "Credentials" tab and at the top middle of the screen click "+Create Credentials".
+![homepage image](public/setup/createcredentials.png)
+---
+
 
 ## **Key Features**
 - **GA4 Tracking**: Integrated GA4 tracking to monitor user interactions and page views.
