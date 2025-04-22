@@ -13,7 +13,7 @@ This project was built to:
 3. **Ensure Secure Authentication**: Authenticate API requests using a Google Cloud Service Account for secure access to GA4 data.
 
 ---
-## [**Project Setup**](#section) 
+## **Project Setup**
 
 ### **Project Keys and Client Email**
 1. You will need to login to your Google Console and select API & Services
