@@ -13,15 +13,35 @@ This project was built to:
 3. **Ensure Secure Authentication**: Authenticate API requests using a Google Cloud Service Account for secure access to GA4 data.
 
 ---
-## **Project Setup**
+## [**Project Setup**](#section) 
+
+### **Project Keys and Client Email**
 1. You will need to login to your Google Console and select API & Services
 2. Click on the "Library" tab and search for ``google analytics data api`` in the Search for APIs & Services search box.
    - Click the "Google Analytics Data API" Button and click Enable.
 3. Once enabled you will go to the "Credentials" tab and at the top middle of the screen click "+Create Credentials".
    - Click "Service account" and fill in the appropriate fields. You will to copy the email address field onces all the fields are fill in this will be used later in your .env.local file. In this case the value is ``test-644@ga4-dashboard-1740677661577.iam.gserviceaccount.com``
 4. Under the "Credentials" Section click on ``test-644@ga4-dashboard-1740677661577.iam.gserviceaccount.com`` Service Account.
+5. Click on the "Keys" tab which is on the top middle of the screen.
+   - Click the "Add Key" Drop-Down Button
+      - Click on the "Create new key" and Select JSON as the Key Type and click the Create link.
+6. This will download a json file to your local machine.
+7. Open the json file and find the below fields.
+   - "private_key":
+   - "client_email":
+8. Open your .env.local file and add the below fields and values
+   - GOOGLE_PRIVATE_KEY=[``private_key`` value from json file]
+   - GOOGLE_CLIENT_EMAIL=[``client_email`` value from json file]
+### **Google Tracking ID**
+1. Navigate to your Google Analytics [property](https://analytics.google.com/analytics/web/) that you want to retrieve the data from.
+2. Click on the "Gear Icon" that will take you to the Admin section.
+3. Scroll to ``Data collection and modification`` section and click on ``Data Streams``
+4. Click on the data stream you want your data from and find the field ``MEASUREMENT ID``.
+   - It will start with a ``G-XXXXXXXXXX``.
+5. Copy this value and paste it in your .env.local file as below
+   - GOOGLE_TRACKING_ID=``G-XXXXXXXXXX``
 
-
+You are now done with the setup!
 ---
 
 
