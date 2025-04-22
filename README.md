@@ -12,7 +12,6 @@ This project was built to:
 2. **Fetch Data Programmatically**: Utilize the GA4 Data API to retrieve analytics data for reporting and analysis.
 3. **Ensure Secure Authentication**: Authenticate API requests using a Google Cloud Service Account for secure access to GA4 data.
 
----
 ## **Project Setup**
 
 ### **Project Keys and Client Email**
@@ -42,7 +41,7 @@ This project was built to:
    - GOOGLE_TRACKING_ID=``G-XXXXXXXXXX``
 
 You are now done with the setup!
----
+
 
 
 ## **Key Features**
