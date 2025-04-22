@@ -17,10 +17,10 @@ This project was built to:
 1. You will need to login to your Google Console and select API & Services
 2. Click on the "Library" tab and search for ``google analytics data api`` in the Search for APIs & Services search box.
    - Click the "Google Analytics Data API" Button and click Enable.
-<img src="public/setup/api.png" alt="screenshot" style="padding: 10px 0px" />
+   <img src="public/setup/api.jpg" alt="screenshot" style="padding: 10px 0px" />
 
 3. Once enabled you will go to the "Credentials" tab and at the top middle of the screen click "+Create Credentials".
-<img src="public/setup/createcredential.jpg" alt="credentials" style="padding: 10px 0px" />
+   <img src="public/setup/createcredential.jpg" alt="credentials" style="padding: 10px 0px" />
    - Click "Service account" and fill in the appropriate fields. You will to copy the email address field onces all the fields are fill in this will be used later in your .env.local file. In this case the value is ``test-644@ga4-dashboard-1740677661577.iam.gserviceaccount.com``
    <img src="public/setup/setupaccount.png" alt="fields" style="padding: 10px 0px" />
 
