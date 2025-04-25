@@ -100,7 +100,9 @@ export default function Component({data}: GroupedPageDataProps) {
       
 
     // remove date key and value from array
-    const countryList = groupedByDate.map(({ date: _date, ...rest }) => rest);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const countryList = groupedByDate.map(({ date, ...rest }) => rest);
+
 
 
     // create an array of countries reguardless of doubles
