@@ -10,6 +10,7 @@ import TotalActiveUsers from "./components/totalactiveusers";
 import ModalPassword from './components/modalpassword';
 import PieBrowser from './components/piebrowser';
 import AreaChart from './components/areachart';
+import Country from './components/country';
 
 export default function AnalyticsData() {
   const [data, setData] = useState(null);
@@ -34,9 +35,10 @@ export default function AnalyticsData() {
       <div className='grid md:grid-cols-1 gap-4 mt-[10px]'>
         {data && <TotalActiveUsers data={data}/>}
       </div>
-      <div className='grid md:grid-cols-2 gap-4 mt-[10px]'>
+      <div className='grid md:grid-cols-3 gap-4 mt-[10px]'>
           {data && <PieBrowser data={data}/>}
           {data && <Location data={data}/>}
+          {data && <Country data={data}/>}
       </div>
       <div className='grid md:grid-cols-2 gap-4 mt-[10px]'>
           {data && <PageData data={data}/>}
