@@ -129,7 +129,6 @@ export default function Component({ data }: GroupedPageDataProps) {
         <div className="grid flex-1 gap-1 text-center sm:text-left">
           <CardTitle>Page Events</CardTitle>
           <CardDescription>
-            Showing total visitors for the last 3 months
           </CardDescription>
         </div>
       </CardHeader>

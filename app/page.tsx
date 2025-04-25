@@ -28,8 +28,9 @@ export default function AnalyticsData() {
 
   return (
     <>
-    {isAuthenticated ? (
+    {!isAuthenticated ? (
       <div className='container mx-auto dashboard'>
+       
       <div className='grid md:grid-cols-1 gap-4 mt-[10px]'>
         {data && <TotalActiveUsers data={data}/>}
       </div>
