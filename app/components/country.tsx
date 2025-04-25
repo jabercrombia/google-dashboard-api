@@ -79,19 +79,24 @@ export default function Component({data}: GroupedPageDataProps) {
     const groupedByDate = Object.entries(
         reformat.reduce((acc, item) => {
           if (!item) return acc;
+      
           const { date, country, views = 0 } = item;
+      
           if (!date || !country) return acc;
       
           if (!acc[date]) {
             acc[date] = { date };
           }
       
-          acc[date][country] = (acc[date][country] || 0) + views;
+          const numericViews = typeof views === 'string' ? parseInt(views, 10) : views;
+          acc[date][country] = (typeof acc[date][country] === 'number' ? acc[date][country] : 0) + numericViews;
       
           return acc;
-        }, {} as Record<string, Record<string, any>>)
-      ).map(([_, data]) => data)
-      .sort((a, b) => b.date.localeCompare(a.date)); // sort descending by date
+        }, {} as Record<string, Record<string, number | string>>)
+      )
+      .map(([_, data]) => data)
+      .sort((a, b) => (b.date as string).localeCompare(a.date as string)); // descending by date
+      
       
 
     // remove date key and value from array
