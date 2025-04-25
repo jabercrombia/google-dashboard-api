@@ -94,7 +94,7 @@ export default function Component({data}: GroupedPageDataProps) {
           return acc;
         }, {} as Record<string, Record<string, number | string>>)
       )
-      .map(([_, data]) => data)
+      .map(([, data]) => data)
       .sort((a, b) => (b.date as string).localeCompare(a.date as string)); // descending by date
       
       
@@ -148,7 +148,7 @@ export default function Component({data}: GroupedPageDataProps) {
                 {
                     listOfCountry.map((elem,index)=> {
                         return(
-                            <Bar
+                            <Bar key={index}
                                 dataKey={elem}
                                 stackId="a"
                                 fill={getColorByIndex(index)}
