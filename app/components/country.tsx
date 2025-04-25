@@ -94,7 +94,7 @@ export default function Component({data}: GroupedPageDataProps) {
           return acc;
         }, {} as Record<string, Record<string, number | string>>)
       )
-      .map(([_, data]) => data)
+      .map(([, data]) => data)
       .sort((a, b) => (b.date as string).localeCompare(a.date as string)); // descending by date
       
       
@@ -107,7 +107,7 @@ export default function Component({data}: GroupedPageDataProps) {
     });
 
     // create an array of countries reguardless of doubles
-    let arr = [];
+    const arr = [];
     for (let x = 0; x < countryList.length; x++){
         for (let y = 0; y < Object.keys(countryList[x]).length; y++){
             arr.push(Object.keys(countryList[x])[y]);
@@ -115,7 +115,7 @@ export default function Component({data}: GroupedPageDataProps) {
        
     }
     // create a unique list of countries
-    let listOfCountry: string[] = [];
+    const listOfCountry: string[] = [];
     for (let r = 0; r < arr.length;r++){
         
         if (!listOfCountry.includes(arr[r])){
