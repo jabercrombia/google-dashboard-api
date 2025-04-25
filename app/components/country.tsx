@@ -101,13 +101,13 @@ export default function Component({data}: GroupedPageDataProps) {
 
     // remove date key and value from array
     const countryList = groupedByDate.map(elem=> {
-        const { date, ...rest } = elem;
+        const { ...rest } = elem;
 
         return rest;
     });
 
     // create an array of countries reguardless of doubles
-    let arr = [];
+    const arr = [];
     for (let x = 0; x < countryList.length; x++){
         for (let y = 0; y < Object.keys(countryList[x]).length; y++){
             arr.push(Object.keys(countryList[x])[y]);
@@ -115,7 +115,7 @@ export default function Component({data}: GroupedPageDataProps) {
        
     }
     // create a unique list of countries
-    let listOfCountry: string[] = [];
+    const listOfCountry: string[] = [];
     for (let r = 0; r < arr.length;r++){
         
         if (!listOfCountry.includes(arr[r])){
