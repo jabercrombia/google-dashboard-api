@@ -66,13 +66,13 @@ const CityViews: React.FC<CityViewsProps> = ({ data }) => {
       const keyA = Object.keys(a)[0];
       const keyB = Object.keys(b)[0];
       return (b[keyB] as number) - (a[keyA] as number); // Sort descending based on values
-  }).slice(0, 5); // Get top 5 cities
+  }).slice(0, 10); // Get top 10 cities
 
   return (
     <div>
       <Card className="h-full flex flex-col">
         <CardHeader className="items-center pb-0">
-          <CardTitle><h2>Top 5 Visited Cities</h2></CardTitle>
+          <CardTitle><h2>Top 10 Visited Cities</h2></CardTitle>
         </CardHeader>
         <CardContent className="flex-1 pb-0">
           <Table>
