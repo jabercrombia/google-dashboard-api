@@ -43,8 +43,15 @@ export async function GET() {
       {
         "name": "date"
       },
+      {
+        "name": "eventName"
+      },
     ],
-        metrics: [{ name: 'activeUsers' },{name: 'screenPageViews', }],
+        metrics: [
+          { name: 'activeUsers' },
+          {name: 'screenPageViews'},
+          {name: 'eventCount'}
+        ],
         // excluding specific city till its excluded in ga4 reports
         "dimensionFilter": {
           "notExpression": {

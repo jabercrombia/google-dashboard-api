@@ -9,6 +9,7 @@ import GraphPageViews from "./components/graphpageviews";
 import TotalActiveUsers from "./components/totalactiveusers";
 import ModalPassword from './components/modalpassword';
 import PieBrowser from './components/piebrowser';
+import AreaChart from './components/areachart';
 
 export default function AnalyticsData() {
   const [data, setData] = useState(null);
@@ -37,8 +38,11 @@ export default function AnalyticsData() {
           {data && <Location data={data}/>}
       </div>
       <div className='grid md:grid-cols-2 gap-4 mt-[10px]'>
-          {data && <GraphPageViews data={data}/>}  
-          {data && <PageData data={data}/>}  
+          {data && <PageData data={data}/>}
+          {data && <AreaChart data={data}/>}    
+      </div>
+      <div className='mt-[10px]'>
+        {data && <GraphPageViews data={data}/>}  
       </div>
     </div>
     ) : (
