@@ -1,6 +1,16 @@
 import { google } from 'googleapis';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+
+  const { searchParams } = new URL(req.url);
+
+  const startDate = searchParams.get('startDate');
+  const endDate = searchParams.get('endDate');
+
+
+  // Return a response (must be NextResponse in App Router)
+  console.log(NextResponse.json({ startDate, endDate }));
   const auth = new google.auth.GoogleAuth({
     credentials: {
         client_email: process.env.GOOGLE_CLIENT_EMAIL,
@@ -20,8 +30,8 @@ export async function GET() {
       requestBody: {
         dateRanges: [
           {
-            startDate: '60daysAgo',
-            endDate: 'today',
+            startDate: startDate ?? '7daysAgo',  // fallback just in case
+            endDate: endDate ?? 'today',
           },
         ],
         "dimensions": [

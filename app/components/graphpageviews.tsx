@@ -52,6 +52,10 @@ export default function PageViews(data : PageViewsProps ) {
     return `${year}-${month}-${day}`;
   }
 
+  if (!data?.data?.rows) {
+    return <div>No data available</div>;
+  }
+
   const chartData = data.data?.rows.map((item: { dimensionValues: { value: string }[], metricValues: { value: number }[]  }) => {
     return { 
       date: convertDate(item.dimensionValues[5]?.value),
