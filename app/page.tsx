@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { Suspense } from "react";
 
 import Location from "./components/location";
 import PageData from "./components/pagedata";
@@ -83,6 +84,7 @@ export default function AnalyticsData() {
   const today = dateString(new Date());
 
   return (
+    <Suspense fallback={<div>Loading...</div>}>
     <div className='container mx-auto dashboard'>
       <div className='flex gap-4 mt-[10px] justify-between'>
         <div>
@@ -123,5 +125,6 @@ export default function AnalyticsData() {
         </>
       )}
     </div>
+    </Suspense>
   );
 }
