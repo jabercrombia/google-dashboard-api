@@ -27,13 +27,13 @@ export default function AnalyticsData() {
   const handleDateUpdate = (name: string, newDate: Date | null) => {
     const updatedDates = { ...selectedDate, [name]: newDate };
     setSelectedDate(updatedDates);
-
+    console.log('updatedDates',updatedDates);
     const params = new URLSearchParams(searchParams.toString());
     if (updatedDates.startDate) {
-      params.set('startDate', updatedDates.startDate);
+      params.set('startDate', dayjs(updatedDates.startDate).format('YYYY-MM-DD'));
     }
     if (updatedDates.endDate) {
-      params.set('endDate', updatedDates.endDate);
+      params.set('endDate', dayjs(updatedDates.endDate).format('YYYY-MM-DD'));
     }
     router.push(`?${params.toString()}`);
   };
@@ -80,8 +80,7 @@ export default function AnalyticsData() {
   date90DaysAgo.setDate(date90DaysAgo.getDate() - 90);
   const format90days = date90DaysAgo;
   const today = new Date();
-  console.log('today',today);
-  console.log('stringtodater',dayjs(dateParamStart));
+
   return (
     
     <div className='container mx-auto dashboard'>
