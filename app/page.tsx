@@ -15,7 +15,7 @@ import { dateString } from './utils/dateFormat';
 
 export default function AnalyticsData() {
   const [data, setData] = useState(null);
-  const [selectedDate, setSelectedDate] = useState<{ [key: string]: Date | null }>({
+  const [selectedDate, setSelectedDate] = useState<{ [key: string]: string | null }>({
     startDate: null,
     endDate: null,
   });
@@ -23,7 +23,7 @@ export default function AnalyticsData() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const handleDateUpdate = (name: string, newDate: Date | null) => {
+  const handleDateUpdate = (name: string, newDate: string | null) => {
     const updatedDates = { ...selectedDate, [name]: newDate };
     setSelectedDate(updatedDates);
 
