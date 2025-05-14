@@ -12,6 +12,7 @@ import AreaChart from './components/areachart';
 import Country from './components/country';
 import Calendar from './components/calendar';
 import { dateString } from './utils/dateFormat';
+import dayjs from 'dayjs';
 
 export default function AnalyticsData() {
   const [data, setData] = useState(null);
@@ -88,7 +89,7 @@ export default function AnalyticsData() {
           <Calendar
             label="Start Date"
             name="startDate"
-            value={dateParamStart ? dateParamStart : date90DaysAgo }
+            value={dateParamStart ? dateParamStart : dayjs(date90DaysAgo).format('YYYY-MM-DD') }
             onDateChange={handleDateUpdate}
           />
         </div>
