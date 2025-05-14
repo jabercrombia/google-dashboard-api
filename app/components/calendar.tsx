@@ -7,9 +7,9 @@ import dayjs from 'dayjs';
 
 interface CalendarProps {
   label?: string;
-  value?: Date | null;
+  value?: string | null;
   name?: string;
-  onDateChange: (name: string, newDate: Date | null) => void;
+  onDateChange: (name: string, newDate: string | null) => void;
 }
 
 export default function Calendar({
