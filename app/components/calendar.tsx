@@ -3,7 +3,7 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-
+import dayjs from 'dayjs';
 interface CalendarProps {
   label?: string;
   value?: Date | null;
@@ -22,7 +22,7 @@ export default function Calendar({
       <DemoContainer components={['DatePicker']}>
         <DatePicker
           label={label}
-          value={value ? value : null}
+          value={value ? dayjs(value) : null}
           onChange={(newValue) => {
             onDateChange(name, newValue ? newValue : null);
           }}
