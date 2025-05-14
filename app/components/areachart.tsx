@@ -72,8 +72,6 @@ export default function Component({ data }: GroupedPageDataProps) {
 
     const rows = data.rows || [];
 
-
-
     const dataFilter = (rows).map((elem) => {
         const obj: { [key: string]: string | number } = {
             date: dateFormat(elem.dimensionValues[5].value),
@@ -120,8 +118,7 @@ export default function Component({ data }: GroupedPageDataProps) {
           if (!(key in entry)) entry[key] = 0;
         }
         return entry;
-      });
-
+      }).sort((a, b) => a.date.localeCompare(b.date)); // ascending by month;
 
   return (
     <Card>

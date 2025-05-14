@@ -5,12 +5,11 @@ export async function GET(req: NextRequest) {
 
   const { searchParams } = new URL(req.url);
 
+  console.log(searchParams.get('startDate'));
   const startDate = searchParams.get('startDate');
   const endDate = searchParams.get('endDate');
 
-
   // Return a response (must be NextResponse in App Router)
-  console.log(NextResponse.json({ startDate, endDate }));
   const auth = new google.auth.GoogleAuth({
     credentials: {
         client_email: process.env.GOOGLE_CLIENT_EMAIL,

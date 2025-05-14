@@ -56,7 +56,7 @@ interface DimensionValue {
 
 export default function Component({data}: GroupedPageDataProps) {
 
-    const reformat = (data.rows ?? [])
+  const reformat = (data.rows ?? [])
     .filter(elem=>{return elem.dimensionValues[0].value !== '(not set)'})
     .map(elem => {
         const date = dateFormat(elem.dimensionValues[5].value);
@@ -74,7 +74,7 @@ export default function Component({data}: GroupedPageDataProps) {
             return obj;
         }
 
-    });
+  });
 
     const groupedByDate = Object.entries(
         reformat.reduce((acc, item) => {
@@ -95,15 +95,11 @@ export default function Component({data}: GroupedPageDataProps) {
         }, {} as Record<string, Record<string, number | string>>)
       )
       .map(([, data]) => data)
-      .sort((a, b) => (b.date as string).localeCompare(a.date as string)); // descending by date
+      .sort((a, b) => (a.date as string).localeCompare(b.date as string)); // descending by date
       
-      
-
     // remove date key and value from array
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const countryList = groupedByDate.map(({ date, ...rest }) => rest);
-
-
 
     // create an array of countries reguardless of doubles
     const arr = [];
