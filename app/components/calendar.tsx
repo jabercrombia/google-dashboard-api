@@ -24,7 +24,7 @@ export default function Calendar({
           label={label}
           value={value ? dayjs(value) : null}
           onChange={(newValue) => {
-            onDateChange(name, newValue ? newValue : null);
+            onDateChange(name, newValue ? newValue.toDate() : null);
           }}
           slotProps={{ textField: { fullWidth: true, name, value } }}
 
