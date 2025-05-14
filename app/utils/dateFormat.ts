@@ -13,4 +13,10 @@ export function dateString(date: Date): string {
     const year = date.getFullYear();
     return `${year}-${month}-${day}`;
 }
+
+//string to date object
+export function stringToDate(date: string): Date {
+    const dateObj = new Date(date); // Date object
+    return dateObj;
+}
   

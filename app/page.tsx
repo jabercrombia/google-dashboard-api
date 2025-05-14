@@ -12,12 +12,12 @@ import PieBrowser from './components/piebrowser';
 import AreaChart from './components/areachart';
 import Country from './components/country';
 import Calendar from './components/calendar';
-import { dateString } from './utils/dateFormat';
+import { dateString, stringToDate } from './utils/dateFormat';
 import dayjs from 'dayjs';
 
 export default function AnalyticsData() {
   const [data, setData] = useState(null);
-  const [selectedDate, setSelectedDate] = useState<{ [key: string]: string | null }>({
+  const [selectedDate, setSelectedDate] = useState<{ [key: string]: Date | null }>({
     startDate: null,
     endDate: null,
   });
@@ -25,7 +25,7 @@ export default function AnalyticsData() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const handleDateUpdate = (name: string, newDate: string | null) => {
+  const handleDateUpdate = (name: string, newDate: Date | null) => {
     const updatedDates = { ...selectedDate, [name]: newDate };
     setSelectedDate(updatedDates);
 
@@ -54,7 +54,6 @@ export default function AnalyticsData() {
 
   useEffect(() => {
 
-
     const params = new URLSearchParams();
 
     if (dateParamStart) {
@@ -80,18 +79,19 @@ export default function AnalyticsData() {
   //get start date and end date values
   const date90DaysAgo = new Date();
   date90DaysAgo.setDate(date90DaysAgo.getDate() - 90);
-
-  const today = dateString(new Date());
-
+  const format90days = date90DaysAgo;
+  const today = new Date();
+  console.log('today',today);
+  console.log('stringtodater',dayjs(dateParamStart));
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    
     <div className='container mx-auto dashboard'>
       <div className='flex gap-4 mt-[10px] justify-between'>
         <div>
           <Calendar
             label="Start Date"
             name="startDate"
-            value={dateParamStart ? dateParamStart : dayjs(date90DaysAgo).format('YYYY-MM-DD') }
+            value={dateParamStart ? dayjs(dateParamStart) : dayjs(format90days) }
             onDateChange={handleDateUpdate}
           />
         </div>
@@ -99,7 +99,7 @@ export default function AnalyticsData() {
           <Calendar
             label="End Date"
             name="endDate"
-            value={dateParamEnd ? dateParamEnd : today }
+            value={dateParamEnd ? dayjs(dateParamEnd) : dayjs(today) }
             onDateChange={handleDateUpdate}
           />
         </div>
@@ -125,6 +125,6 @@ export default function AnalyticsData() {
         </>
       )}
     </div>
-    </Suspense>
+
   );
 }
