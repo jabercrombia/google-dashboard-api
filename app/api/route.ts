@@ -1,11 +1,10 @@
 import { google } from 'googleapis';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 
 export async function GET(req: NextRequest) {
 
   const { searchParams } = new URL(req.url);
 
-  console.log(searchParams.get('startDate'));
   const startDate = searchParams.get('startDate');
   const endDate = searchParams.get('endDate');
 
