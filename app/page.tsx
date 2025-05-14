@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Suspense } from "react";
 
 import Location from "./components/location";
 import PageData from "./components/pagedata";
@@ -12,7 +11,7 @@ import PieBrowser from './components/piebrowser';
 import AreaChart from './components/areachart';
 import Country from './components/country';
 import Calendar from './components/calendar';
-import { dateString, stringToDate } from './utils/dateFormat';
+import { dateString } from './utils/dateFormat';
 import dayjs from 'dayjs';
 
 export default function AnalyticsData() {
