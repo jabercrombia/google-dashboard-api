@@ -3,7 +3,7 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import dayjs from 'dayjs';
+import dayjs, { isDayjs } from 'dayjs';
 interface CalendarProps {
   label?: string;
   value?: Date | null;
@@ -11,22 +11,24 @@ interface CalendarProps {
   onDateChange: (name: string, newDate: Date | null) => void;
 }
 
+
 export default function Calendar({
   label,
-  value,
-  name = "date",
-  onDateChange
+  value: initialValue,
+  name = "date"
 }: CalendarProps) {
+  const [value, setValue] = React.useState<Date | null>(initialValue ?? null);
+
+  console.log('Incoming value to DatePicker:', dayjs(value));
+
+  console.log('Calendar component', { label, value, name });
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['DatePicker']}>
         <DatePicker
           label={label}
-          value={value ? dayjs(value) : null}
-          onChange={(newValue) => {
-            onDateChange(name, newValue ? newValue.toDate() : null);
-          }}
-          slotProps={{ textField: { fullWidth: true, name, value } }}
+          value={value ? (isDayjs(value) ? value : dayjs(value)) : null}
+          slotProps={{ textField: { fullWidth: true, name } }}
 
         />
       </DemoContainer>
