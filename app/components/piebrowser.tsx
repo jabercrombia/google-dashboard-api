@@ -30,7 +30,7 @@ const PieBrowser: React.FC<BrowserProps> = ({ data }) => {
 
     const totalVisitors = React.useMemo(() => {
         return (data?.rows ?? []).reduce((acc, row) => acc + Number(row.metricValues[0].value), 0)
-    }, [])
+    }, [data]) // need to add data to dependency so when there is an update the value changes
 
     const browserData = (data?.rows ?? []).map((row) => {
         const browser = row.dimensionValues[3].value // Browser is at index 3
