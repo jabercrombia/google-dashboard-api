@@ -90,7 +90,7 @@ export default function AnalyticsData() {
             label="Start Date"
             name="startDate"
             value={dateParamStart ? dayjs(dateParamStart).toDate() : dayjs(format90days).toDate() }
-            onDateChange={handleDateUpdate}
+            onChange={(value) => handleDateUpdate("startDate", value?.toDate() || null)}
           />
         </div>
         <div>
@@ -98,7 +98,7 @@ export default function AnalyticsData() {
             label="End Date"
             name="endDate"
             value={dateParamEnd ? dayjs(dateParamEnd).toDate() : dayjs(today).toDate() }
-            onDateChange={handleDateUpdate}
+            onChange={(value) => handleDateUpdate("endDate", value?.toDate() || null)}
           />
         </div>
       </div>
