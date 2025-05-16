@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { GoogleAnalytics } from '@next/third-parties/google'
+import { Analytics } from "@vercel/analytics/next"
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         {children}
       </body>
+      <Analytics />
       <GoogleAnalytics gaId={process.env.GOOGLE_TRACKIND_ID || ''} />
     </html>
   );
